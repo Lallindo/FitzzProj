@@ -57,22 +57,21 @@ class Endereco
     {
         $this->rua_endereco = $rua;
     }
-
-    public function getCidade()
-    {
-        return $this->cidade_endereco;
-    }
-
+    
     public function getBairro()
     {
         return $this->bairro_endereco;
     }
-
     public function setBairro($bairro)
     {
         $this->bairro_endereco = $bairro;
     }
-
+    
+    public function getCidade()
+    {
+        return $this->cidade_endereco;
+    }
+    
     public function setCidade($cidade)
     {
         $this->cidade_endereco = $cidade;

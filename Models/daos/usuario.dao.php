@@ -69,21 +69,39 @@ class UsuarioDAO
             'dataNasc' => $dataNasc
         ]);
 
-        $sql_para_id = "SELECT id_usuario FROM usuarios where cpf_usuario = :cpf";
+        // Email será único então o SQL abaixo deverá usar ele
+        $sql_para_id = "SELECT id_usuario FROM usuarios where email_usuario = :email";
         $stmt = $this->pdo->prepare($sql_para_id);
         var_dump($usuario->getCPF());
-        // $stmt->execute(['cpf' => $usuario->getCPF()]);
-        // $id_user_arg = $stmt->fetchAll(PDO::FETCH_OBJ);
-        // var_dump($id_user_arg);
+        $stmt->execute(['email' => $usuario->getEmail()]);
+        $id_user_arg = $stmt->fetchAll(PDO::FETCH_OBJ)[0]->id_usuario;
+        var_dump($id_user_arg);
 
         $sql_Tel = "INSERT INTO telefones (id_usuario_telefone, numero_telefone)
         VALUES (:id_user, :tel)";
         $stmt = $this->pdo->prepare($sql_Tel);
 
-        var_dump($usuario->getTel());
-        // $stmt->execute([
-        //     'id_user' => $id_user_arg,
-        //     'tel' => $usuario->getTel()[0]
-        // ]);
+        var_dump($usuario->getTel()[0]->getNum());
+        $stmt->execute([
+            'id_user' => $id_user_arg,
+            'tel' => $usuario->getTel()[0]->getNum()
+        ]);  
+
+        $sql_End = "INSERT INTO enderecos 
+        (id_usuario_endereco, tipo_endereco, rua_endereco, bairro_endereco, cidade_endereco, estado_endereco, cep_endereco)
+        VALUES (:id_usuario, :tipo, :rua, :bairro, :cidade, :estado, :cep)";
+
+        $end = $usuario->getEnd()[0];
+
+        $stmt = $this->pdo->prepare($sql_End);
+        $stmt->execute([
+            'id_usuario' => $id_user_arg,
+            'tipo' => $end->getTipo(),
+            'rua' => $end->getRua(),
+            'bairro' => $end->getBairro(),
+            'cidade' => $end->getCidade(),
+            'estado' => $end->getEstado(),
+            'cep' => $end->getCEP()
+        ]);
     }
 }
