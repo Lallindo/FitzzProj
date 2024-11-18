@@ -38,6 +38,7 @@ $('#cep').blur(function () {
                     $('#erCep').text('Erro! CEP não foi encontrado.');
                     // Tirar os inputs do READONLY
                 } else {
+                    console.log(response);
                     addressData(response);
                 } 
             }
@@ -51,7 +52,7 @@ function addressData(response) {
     $('#logr').val(response['logradouro']);
     $('#bairro').val(response['bairro']);
     $('#cid').val(response['localidade']);
-    $('#est').val(response['estado']);
+    $('#est').val(response['uf']);
 }
 
 // --- --- ---

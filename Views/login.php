@@ -19,6 +19,7 @@ if ($_POST) {
         // Criação das variáveis de sessão
         $_SESSION['user_id'] = $user->id_usuario; // Salva o id do usuário
         $_SESSION['user_name'] = $user->nomecomp_usuario; // Salva o nome do usuário
+        $_SESSION['user_email'] = $user->email_usuario; // Salva o nome do usuário
         $_SESSION['user_is_adm'] = 0; // Se o usuário for ADM partes 
         header('location: index.php');
     } else {

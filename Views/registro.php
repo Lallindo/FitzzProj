@@ -14,7 +14,7 @@ if ($_POST) {
     $rua = filter_input(INPUT_POST, 'logr', FILTER_SANITIZE_SPECIAL_CHARS);
     $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_SPECIAL_CHARS);
     $cidade = filter_input(INPUT_POST, 'cid', FILTER_SANITIZE_SPECIAL_CHARS);
-    $estado = filter_input(INPUT_POST, 'est', FILTER_SANITIZE_SPECIAL_CHARS);
+    $estado = filter_input(INPUT_POST, 'uf', FILTER_SANITIZE_SPECIAL_CHARS);
 
     // Feito para inserir apenas os números do cpf no banco
     $cpf1 = explode('.', $cpf);
@@ -28,7 +28,7 @@ if ($_POST) {
     $usuario = new Usuario(
         0, $nome, $cpfBD, $email,
         $senha, date('Y/m/d'), $dataNasc, 
-        $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $estado, $cepBD
+        $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $uf, $cepBD
     );
 
     $usuarioDAO = new UsuarioDAO($pdo);
