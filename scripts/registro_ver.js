@@ -21,7 +21,7 @@ function formatCEP(cep) {
 // Chamado da API 
 $('#cep').blur(function () {
     console.log(this.value.length); 
-    console.log($('#erCep').value)
+    console.log($('#erCep').value);
     if (this.value.length < 10) {
         // Se o CEP não tiver todos os dígitos retorna um erro
         $('#erCep').text('Erro! Verifique se o CEP inserido está correto.');
@@ -38,7 +38,6 @@ $('#cep').blur(function () {
                     $('#erCep').text('Erro! CEP não foi encontrado.');
                     // Tirar os inputs do READONLY
                 } else {
-                    console.log(response);
                     addressData(response);
                 } 
             }

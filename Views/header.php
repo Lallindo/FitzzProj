@@ -32,6 +32,7 @@ require_once '../models/daos/pedido.dao.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Styles/style.css">
+    <link rel="stylesheet" href="../Style/produto_Style.css">
     <!-- CDN do BootStrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -41,15 +42,14 @@ require_once '../models/daos/pedido.dao.php';
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
+            <a class="navlink-active" href="index.php">Catálogo</a>
             <?php
                 if (!isset($_SESSION['user_name'])) {
                     echo "<a class='navlink-active' href='login.php'>Faça login</a>";
                 } else {
-                    echo "<a class='navbrand-active'>{$_SESSION['user_name']}</a>"; 
+                    echo "<a class='navbrand-active' href='perfil.php'>{$_SESSION['user_name']}</a>"; 
                 }
             ?>
-        </div>
-        <div>
             <a class="navlink-active" href="logout.php?func=logout">Logout</a>
         </div>
     </nav>

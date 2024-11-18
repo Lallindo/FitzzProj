@@ -1,0 +1,13 @@
+.btn_cor {
+    width: 40px; 
+    height: 40px;
+    border: 1px solid #ccc;
+}
+
+.btn_size {
+    width: 40px; 
+    height: 40px;
+    border: 1px solid #ccc;
+    background-color: #fff000;
+}
+

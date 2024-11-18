@@ -15,7 +15,7 @@ class Produto {
         $cor_espec = '', 
         $tamanho_espec = '',
         $quant_espec = 0,
-        $img_espec
+        $img_espec = ''
     ) {
         // Adicionar new Especificacoes
 

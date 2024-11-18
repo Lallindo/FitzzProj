@@ -35,9 +35,16 @@ $usuarioDAO = new UsuarioDAO($pdo);
             <tbody>
                 <?php
                     
-                
-                var_dump($usuarioDAO->buscarPorId(new Usuario(id_usuario: $_SESSION['user_id'])));
-
+                    foreach($usuarioDAO->buscarTelefone(new Usuario(id_usuario: $_SESSION['user_id'])) as $tel) {
+                        echo 
+                        "<tr>
+                            <td>{$tel->numero_telefone}</td>
+                            <td>    
+                                <button class='btn btn-warning btn-sm'>Alterar</button>
+                                <button class='btn btn-danger btn-sm'>Remover</button>
+                            </td>
+                        </tr>";
+                    }
                 ?>
             </tbody>
         </table>
@@ -50,18 +57,28 @@ $usuarioDAO = new UsuarioDAO($pdo);
             <thead class="table-dark">
                 <tr>
                     <th>Endereço</th>
+                    <th>Bairro</th>
+                    <th>Cidade</th>
+                    <th>UF</th>
                     <th>Ação</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Rua das Flores, 123, São Paulo - SP</td>
-                    <td><button class="btn btn-danger btn-sm">Remover</button></td>
-                </tr>
-                <tr>
-                    <td>Avenida Central, 456, Rio de Janeiro - RJ</td>
-                    <td><button class="btn btn-danger btn-sm">Remover</button></td>
-                </tr>
+                <?php
+                    foreach($usuarioDAO->buscarEndereco(new Usuario(id_usuario: $_SESSION['user_id'])) as $end) {
+                        echo 
+                        "<tr>
+                            <td>{$end->rua_endereco}</td>
+                            <td>{$end->bairro_endereco}</td>
+                            <td>{$end->cidade_endereco}</td>
+                            <td>{$end->estado_endereco}</td>
+                            <td>    
+                                <button class='btn btn-warning btn-sm'>Alterar</button>
+                                <button class='btn btn-danger btn-sm'>Remover</button>
+                            </td>
+                        </tr>";
+                    }
+                ?>
             </tbody>
         </table>
     </div>
@@ -79,18 +96,17 @@ $usuarioDAO = new UsuarioDAO($pdo);
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>#1234</td>
-                    <td>2024-11-01</td>
-                    <td><span class="badge bg-success">Concluído</span></td>
-                    <td>R$ 150,00</td>
-                </tr>
-                <tr>
-                    <td>#1235</td>
-                    <td>2024-11-10</td>
-                    <td><span class="badge bg-warning">Em processamento</span></td>
-                    <td>R$ 200,00</td>
-                </tr>
+                <?php
+                    foreach($usuarioDAO->buscarPedido(new Usuario(id_usuario: $_SESSION['user_id'])) as $ped) {
+                        echo 
+                        "<tr>
+                            <td>{$ped->id_pedido}</td>
+                            <td>{$ped->id_endereco_pedido}</td>
+                            <td>{$ped->datacriacao_pedido}</td>
+                            <td>{$ped->status_pedido}</td> 
+                        </tr>";
+                    }
+                ?>
             </tbody>
         </table>
     </div>
