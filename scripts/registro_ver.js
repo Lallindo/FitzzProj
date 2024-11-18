@@ -36,6 +36,7 @@ $('#cep').blur(function () {
                 if (response['erro']) {
                     $('#erCep').hasClass('hidden') ? $('#erCep').removeClass('hidden') : null;
                     $('#erCep').text('Erro! CEP não foi encontrado.');
+                    // Tirar os inputs do READONLY
                 } else {
                     addressData(response);
                 } 

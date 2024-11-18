@@ -18,13 +18,13 @@ class UsuarioDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function buscarPorCPF($usuario)
+    public function buscarPorEmail($usuario)
     {
         // Funcionamento já verificado
-        $sql = "SELECT * FROM usuarios WHERE cpf_usuario = :cpf";
+        $sql = "SELECT * FROM usuarios WHERE email_usuario = :email";
         $stmt = $this->pdo->prepare($sql);
-        $cpf = $usuario->getCPF();
-        $stmt->execute(['cpf' => $cpf]);
+        $email = $usuario->getEmail();
+        $stmt->execute(['email' => $email]);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 

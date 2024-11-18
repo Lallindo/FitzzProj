@@ -19,10 +19,10 @@ class PedidoDAO
     }
 
     public function buscarEndereco($pedido) {
-        $sql = "SELECT * FROM enderecos WHERE id_enderecos = :end";
+        $sql = "SELECT * FROM enderecos WHERE id_endereco = :end";
         $stmt = $this->pdo->prepare($sql);
         $endereco = $pedido->getEnd();
-        $id_endereco = $endereco['id_endereco'];
+        $id_endereco = $endereco->getId();
         $stmt->execute(['end' => $id_endereco]);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }

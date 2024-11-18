@@ -1,5 +1,7 @@
 <?php
+// Registro está funcionando
 session_start();
+
 require_once '../models/conexao.php';
 
 require_once '../models/classes/usuario.class.php';
@@ -18,8 +20,9 @@ require_once '../models/daos/especificacao.dao.php';
 require_once '../models/daos/item.dao.php';
 require_once '../models/daos/pedido.dao.php';
 
-ini_set("allow_url_fopen", 1);
+// ini_set("allow_url_fopen", 1);
 // Habilita abertura de arquivos com a URL
+// Era usado quando a API era chamada pelo PHP
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +41,16 @@ ini_set("allow_url_fopen", 1);
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Logo</a>
+            <?php
+                if (!isset($_SESSION['user_name'])) {
+                    echo "<a class='navlink-active' href='login.php'>Faça login</a>";
+                } else {
+                    echo "<a class='navbrand-active'>{$_SESSION['user_name']}</a>"; 
+                }
+            ?>
+        </div>
+        <div>
+            <a class="navlink-active" href="logout.php?func=logout">Logout</a>
         </div>
     </nav>
     <!-- CDN do BootStrap 5 -->
