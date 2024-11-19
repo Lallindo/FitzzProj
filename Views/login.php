@@ -49,6 +49,8 @@ if ($_POST) {
         <input type="password" id="senha" name="senha" required>
         <span class="span text-center"><?php echo $msgErr ?></span>
 
+        <a href="registro.php">Ainda não tenho uma conta</a>    
+
         <button class="my-2" type="submit">Login</button>
     </form> 
 </body>
