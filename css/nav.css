@@ -7,15 +7,22 @@
     font-family: "IBM Plex Serif", serif;
     font-weight: 400;
     font-style: normal;
+    
 }
 
 nav {
+    height: 3.800rem;
+    box-shadow: 0px 2px 5px #00000052;
     display: flex;
     background-color: #F4F4F4;
     flex-direction: row;
     padding: 15px 0px 0px 0px;
-    word-spacing: 25px;
+    word-spacing: 1.875rem;
     justify-content: space-around;
+    position: fixed; /* Fixa a barra de navegação no topo */
+    top: 0; /* Posiciona a barra de navegação no topo */
+    width: 100%; /* Garante que a barra de navegação ocupe toda a largura da tela */
+    z-index: 1000
 }
 
 nav ul {
@@ -114,4 +121,13 @@ nav ul li:hover{
         width: 16px;
         height: 16px;
     }
+}
+
+a {
+    text-decoration: none; 
+    color: inherit; 
+}
+
+a:hover {
+    color: #00000044;
 }

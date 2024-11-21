@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" href="./css/nav.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="./index.html"><img class="logo_nav" src="./imagens/logo.webp" alt="" draggable="false"></a>
+        <ul id="menu">
+            <li><a href="./index.html">HOME</a></li>
+            <li><a href="./camisetas.html">CAMISETAS</a></li>
+            <li><a href="./moletons.html">MOLETONS</a></li>
+            <li><a href="./bermudas.html">BERMUDAS</a></li>
+            <li style="padding-bottom: 0.850rem;border-bottom-style: solid;border-bottom-width: 0.200rem;border-bottom-color: #FBD316;"><img class="icone_menu" src="./imagens/user.ico" alt="" draggable="false"></li>
+            <li><img class="icone_menu" src="./imagens/shopping-cart.ico" alt="" draggable="false"></li>
+            <li><img class="icone_menu" src="./imagens/lupa.ico" alt="" draggable="false"></li>
+        </ul>
+    </nav>
+
+    <div id="conteudo">
+        <img class="logoVertical" src="./imagens/logoEmPe.png" alt="Logo">
+        <h1>Entre ou Cadastre-se</h1>
+        <form action="/login" method="post">
+            <input class="email" type="text" id="email" name="email" placeholder="E-mail" required>
+
+            <p>ou</p>
+
+            <button class="btn_google" type="button">
+                <img src="./imagens/google.jpg" alt="Google Login">
+            </button>
+
+            <div class="botoes">
+                <button class="btn_criarAcc" type="button" onclick="window.location.href='./cadastro.html'">Criar conta</button>
+                <button class="btn_entrar" type="submit">Entrar</button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

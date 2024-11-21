@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/dados_pessoais.css">
+    <link rel="stylesheet" href="./css/nav.css">
+</head>
+
+<body>
+
+    <nav>
+        <a href="./index.html"><img class="logo_nav" src="./imagens/logo.webp" alt="" draggable="false"></a>
+        <ul id="menu">
+            <li><a href="./index.html">HOME</a></li>
+            <li><a href="./camisetas.html">CAMISETAS</a></li>
+            <li><a href="./moletons.html">MOLETONS</a></li>
+            <li><a href="./bermudas.html">BERMUDAS</a></li>
+            <li style="padding-bottom: 0.850rem;border-bottom-style: solid;border-bottom-width: 0.200rem;border-bottom-color: #FBD316;"><img class="icone_menu" src="./imagens/user.ico" alt="" draggable="false"></li>
+            <li><img class="icone_menu" src="./imagens/shopping-cart.ico" alt="" draggable="false"></li>
+            <li><img class="icone_menu" src="./imagens/lupa.ico" alt="" draggable="false"></li>
+        </ul>
+    </nav>
+
+
+    <div class="menu_lateral">
+        <span class="pedidos">Pedidos</span>
+        <span class="dados">Meus Dados</span>
+        <span class="enderecos">Endereços</span>
+    </div>
+
+    <div id="conteudo">
+        <h1>Endereço</h1>
+        <form action="/dados_pessoais" method="post">
+            <label for="nome">Nome Completo</label>
+            <input class="inputs" type="text" id="nome" name="nome" placeholder="" required>
+
+            <label for="nascimento">Data de Nascimento</label>
+            <input class="inputs" type="text" id="nascimento" name="nascimento" placeholder="" required>
+
+            <label for="cpf">CPF</label>
+            <input class="inputs" type="text" id="cpf" name="cpf" placeholder="" required>
+
+            <label for="celular">Celular</label>
+            <input class="inputs" type="text" id="celular" name="celular" placeholder="" required>
+
+            <div class="botoes">
+                <button class="btn_concluir" type="submit" onclick="window.location.href='./dados_pessoais_editar.html'">Editar</button>
+            </div>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

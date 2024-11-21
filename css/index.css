@@ -9,6 +9,9 @@
     user-select: none
 }
 
+body{
+    padding-top: 61px;
+}
 
 #banner {
     position: relative;
@@ -82,7 +85,7 @@
     padding: 4rem 1.875rem;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -100,7 +103,7 @@
 
 #produtos img {
     box-shadow: 0px 10px 19px #00000052;
-    width: 580px;
+    width: 31.25rem;
     max-width: 100%;
     height: auto;
 }
@@ -149,10 +152,10 @@
 }
 
 #favoritos {
-    padding: 0.8rem 1.875rem;
+    padding: 4rem 1.875rem;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
@@ -165,7 +168,7 @@
 }
 
 #favoritos img {
-    width: 580px;
+    width: 31.25rem;
     max-width: 100%;
     height: auto;
 }
