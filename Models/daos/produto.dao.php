@@ -41,11 +41,21 @@ class ProdutoDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function buscarSubstring($produto) {
+        $substringNome = "'%{$produto->getNome()}%'"; 
+        $sql = "SELECT * FROM produtos WHERE nome_produto LIKE :sub";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'sub' => $substringNome
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function buscarFotosBasicas($produto) {
         $sql_para_id = "SELECT id_produto FROM produtos WHERE nome_produto = :prod";
             $stmt = $this->pdo->prepare($sql_para_id);
             $stmt->execute([
-                'prod' => $produto->getNome() 
+                'prod' => $produto->nome_produto 
             ]);
             $id_inserido = $stmt->fetchAll(PDO::FETCH_OBJ)[0]->id_produto;
 

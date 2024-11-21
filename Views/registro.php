@@ -10,11 +10,11 @@ if ($_POST) {
     $dataNasc = date('Y/m/d', strtotime(filter_input(INPUT_POST, 'dataNasc', FILTER_SANITIZE_SPECIAL_CHARS)));
     $numero = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_SPECIAL_CHARS);
     $cep = filter_input(INPUT_POST, 'cep', FILTER_SANITIZE_SPECIAL_CHARS);
-    $num = filter_input(INPUT_POST, 'numEnd', FILTER_SANITIZE_SPECIAL_CHARS);
-    $rua = filter_input(INPUT_POST, 'logr', FILTER_SANITIZE_SPECIAL_CHARS);
+    $num = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_SPECIAL_CHARS);
+    $rua = filter_input(INPUT_POST, 'rua', FILTER_SANITIZE_SPECIAL_CHARS);
     $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_SPECIAL_CHARS);
     $cidade = filter_input(INPUT_POST, 'cid', FILTER_SANITIZE_SPECIAL_CHARS);
-    $estado = filter_input(INPUT_POST, 'uf', FILTER_SANITIZE_SPECIAL_CHARS);
+    $estado = filter_input(INPUT_POST, 'est', FILTER_SANITIZE_SPECIAL_CHARS);
 
     // Feito para inserir apenas os números do cpf no banco
     $cpf1 = explode('.', $cpf);
@@ -28,7 +28,7 @@ if ($_POST) {
     $usuario = new Usuario(
         0, $nome, $cpfBD, $email,
         $senha, date('Y/m/d'), $dataNasc, 
-        $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $uf, $cepBD
+        $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $estado, $cepBD
     );
 
     $usuarioDAO = new UsuarioDAO($pdo);
@@ -43,66 +43,69 @@ if ($_POST) {
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de usuário</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/nav.css">
 </head>
+
 <body>
-    <h1 class="text-center">Registro</h1>
 
-    <form class="row mx-5 align-items-center" method="POST">
-        <label class="col-auto" for="nome">Nome:</label>
-        <input type="text" name="nome" id="nome">
+    <div id="conteudo">
+        <h1>Cadastro</h1>
+        <form method="post">
+            <label for="nome">Nome Completo</label>
+            <input class="inputs" type="text" id="nome" name="nome" placeholder="Nome" required>
 
-        <label class="col-auto" for="email">Email:</label>
-        <input type="email" name="email" id="email">
+            <label for="dataNasc">Data de Nascimento</label>
+            <input class="inputs" type="date" id="dataNasc" name="dataNasc" placeholder="dd/mm/aaaa" required>
 
-        <label class="col-auto" for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" maxlength="14">
-        <span class="spanError hidden" id="erCpf">Erro</span>
-        <!-- JS para formatação -->
+            <label for="cpf">CPF</label>
+            <input class="inputs" type="text" id="cpf" name="cpf" placeholder="123.456.789-00" maxlength="14" required>
 
-        <label class="col-auto" for="senha">Senha:</label>
-        <input type="password" name="senha" id="senha">
-        <span class="spanError hidden" id="erSenha">Erro</span>
+            <label for="telefone">Celular</label>
+            <input class="inputs" type="text" id="telefone" name="telefone" placeholder="(99) 99999-9999" required>
 
-        <label class="col-auto" for="senhaRep">Repita sua senha:</label>
-        <input type="password" name="senhaRep" id="senhaRep">
-        <span class="spanError hidden" id="erSenhaRep">Erro</span>
-        <!-- Trocas as senhas para Password -->
+            <label for="email">E-mail</label>
+            <input class="inputs" type="email" id="email" name="email" placeholder="E-mail" required>
 
-        <label class="col-auto" for="dataNasc">Data de nascimento:</label>
-        <input type="date" name="dataNasc" id="dataNasc">
+            <label for="senha">Senha</label>
+            <input class="inputs" type="password" id="senha" name="senha" placeholder="**********" required>
 
-        <label class="col-auto" for="telefone">Número de telefone:</label>
-        <input type="tel" name="telefone" id="telefone">
+            <label for="checkSenha">Confirme a Senha</label>
+            <input class="inputs" type="password" id="checkSenha" name="checkSenha" placeholder="**********" required>
 
-        <label class="col-auto" for="cep">CEP:</label>
-        <input type="text" name="cep" id="cep" maxlength="10">
-        <span class="spanError hidden" id="erCep">Erro!</span>
-        <!-- JS para formatação -->
+            <label for="cep">CEP</label>
+            <input class="inputs" type="text" id="cep" name="cep" placeholder="12345-000" maxlength="10" required>
+            
+            <label for="numero">Número</label>
+            <input class="inputs" type="text" id="numero" name="numero" placeholder="" required>
+            
+            <label for="rua">Rua</label>
+            <input class="inputs" type="text" id="rua" name="rua" placeholder="" required>
 
-        <label class="col-auto" for="numEnd">Número:</label>
-        <input type="text" name="numEnd" id="numEnd">
+            <label for="bairro">Bairro</label>
+            <input class="inputs" type="text" id="bairro" name="bairro" placeholder="" required>
+            
+            <label for="cid">Cidade</label>
+            <input class="inputs" type="text" id="cid" name="cid" placeholder="" required>
+            
+            <label for="est">Estado</label>
+            <input class="inputs" type="text" id="est" name="est" placeholder="" required>
 
-        <label class="col-auto" for="logr">Endereço:</label>
-        <input type="text" name="logr" id="logr" readonly>
 
-        <label class="col-auto" for="bairro">Bairro:</label>
-        <input type="text" name="bairro" id="bairro" readonly>
 
-        <label class="col-auto" for="cid">Cidade:</label>
-        <input type="text" name="cid" id="cid" readonly>
-
-        <label class="col-auto" for="est">Estado:</label>
-        <input type="text" name="est" id="est" readonly>
-
-        <button class="btn btn-primary my-4" type="submit" id="btnSub">Registrar-se</button>
-    </form>
-
+            <div class="botoes">
+                <button class="btn_proximo" type="submit" onclick="window.location.href='./cadastro2.html'">Proximo</button>
+            </div>
+        </form>
+    </div>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <script type="text/javascript" src="../scripts/registro_ver.js"></script>
 </body>
+
 </html>

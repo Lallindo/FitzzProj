@@ -20,68 +20,113 @@ if ($_GET) {
 
 <body class="bg-light">
 
-    <div class="container my-5">
-        <div class="row">
-            <!-- Imagens do Produto -->
-            <div class="col-md-6">
-                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="https://via.placeholder.com/600x400" class="d-block w-100" alt="Imagem Produto 1 - 1">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="https://via.placeholder.com/600x400" class="d-block w-100" alt="Imagem Produto 1 - 2">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Anterior</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Próximo</span>
-                    </button>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitzz - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/pagina_produto.css">
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/footer.css">
+</head>
+
+<body>
+
+    <div id="favoritos">
+        <div>
+            <button class="arrow left" onclick="previousImage()">&#8249;</button>
+            <img id="main-image" src="./imagens/camisetas/deidara-branca-c-1.webp" alt="Camiseta TLOU Branca"
+                draggable="false">
+            <button class="arrow right" onclick="nextImage()">&#8250;</button>
+        </div>
+        <div class="titulo_img">
+
+            <p>
+            <div class="titulo_paginaProduto">
+                <span class="nome_produto">Camiseta Deidara Branca</span>
+                <br><img class="avaliacao" src="./imagens/index/estrelas.png" alt="" draggable="false">
+            </div>
+            <div class="cor_paginaProduto">
+                <span class="nome_produto">Cor</span>
+                <div class="colors">
+                    <div class="color" style="background-color: #d3d3d3; border: 1px solid black;"></div>
+                    <div class="color" style="background-color: #000000;"></div>
+                    <div class="color" style="background-color: #ffffff; border: 1px solid black;"></div>
                 </div>
             </div>
-
-            <!-- Informações do Produto -->
-            <div class="col-md-6">
-                <h1 class="mb-3"><?= $retorno->nome_produto ?></h1>
-                <p class="lead text-success">R$ <?= $retorno->preco_produto ?></p>
-                <div class="mb-3">
-                    <!-- Seleção de Cores -->
-                    <div class="mb-3">
-                        <label class="form-label d-block">Escolha uma cor:</label>
-                        <div class="d-flex gap-2">
-                            <button class="btn" style="background-color: red;" title="Vermelho"></button>
-                            <button class="btn" style="background-color: blue;" title="Azul"></button>
-                            <button class="btn" style="background-color: green;" title="Verde"></button>
-                            <button class="btn" style="background-color: black;" title="Preto"></button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="mb-3">
-                    <!-- Seleção de Cores -->
-                    <div class="mb-3">
-                        <label class="form-label d-block">Escolha uma cor:</label>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-primary">PP</button>
-                            <button class="btn btn-primary">P</button>
-                            <button class="btn btn-primary">M</button>
-                            <button class="btn btn-primary">G</button>
-                            <button class="btn btn-primary">GG</button>
-                        </div>
-                    </div>
-
-                </div>
-                <p>
-                    <?= $retorno->desc_produto ?>
-                </p>
-                <button class="btn btn-primary btn-lg w-100">Comprar Agora</button>
-            </div>
+            <br><span class="preco_produto">R$74,00</span>
+            <br><input type="number" value="1" min="1" max="99"><button class="add_cart">ADICIONAR AO
+                CARRINHO</button><br>
+            <span>Estoque: 50</span>
+            </p>
+            <h3>DESCRIÇÃO</h3>
+            <h5>A FITZZ apresenta a mais avançada tecnologia<br>
+                em Super DRY. Nossas camisetas combinam o<br>
+                toque suave da poliamida com tecnologia de<br>
+                alta absorção, ideal para quem adora um <br>
+                treino internso. Agora, além de vestir seus <br>
+                personagens favoritos, você pode treinar com <br>
+                suas camisetas favoritos, sem sentir calor.
+            </h5>
         </div>
     </div>
+
+    <div class="msg_favorito_posicao">
+        <p class="msg_favorito">
+            PRODUTOS RELACIONADOS
+        </p>
+    </div>
+
+    <div id="favoritos">
+
+        <div class="titulo_img">
+            <img src="./imagens/index/camiseta1.webp" alt="" draggable="false">
+            <p>
+                <span class="nome_produto">Camiseta TLOU Preta</span>
+                <br><img class="avaliacao" src="./imagens/index/estrelas.png" alt="" draggable="false">
+                <br><span class="preco_produto">R$74,00</span>
+                <br><input type="number" value="1" min="1" max="99"><button class="add_cart">ADICIONAR AO
+                    CARRINHO</button>
+                <br><button class="view_produto">VER PRODUTO</button>
+            </p>
+        </div>
+
+        <div class="titulo_img">
+            <img src="./imagens/index/camiseta3.webp" alt="" draggable="false">
+            <p>
+                <span class="nome_produto">Camiseta Hanzo Cinza</span>
+                <br><img class="avaliacao" src="./imagens/index/estrelas.png" alt="" draggable="false">
+                <br><span class="preco_produto">R$74,00</span>
+                <br><input type="number" value="1" min="1" max="99"><button class="add_cart">ADICIONAR AO
+                    CARRINHO</button>
+                <br><button class="view_produto">VER PRODUTO</button>
+            </p>
+        </div>
+
+
+
+        <div class="titulo_img">
+            <img src="./imagens/camisetas/demon-preta-f-1.webp" alt="" draggable="false">
+            <p>
+                <span class="nome_produto">Camiseta DemonS Preta</span>
+                <br><img class="avaliacao" src="./imagens/index/estrelas.png" alt="" draggable="false">
+                <br><span class="preco_produto">R$74,00</span>
+                <br><input type="number" value="1" min="1" max="99"><button class="add_cart">ADICIONAR AO
+                    CARRINHO</button>
+                <br><button class="view_produto">VER PRODUTO</button>
+            </p>
+        </div>
+    </div>
+
+    <footer><img src="./imagens/logo_branca.webp" alt=""></footer>
+    <script src="./javascript/pagina_produto.js"></script>
+</body>
+
+</html>
 
 </body>
 

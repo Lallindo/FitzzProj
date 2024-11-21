@@ -13,6 +13,31 @@ $usuarioDAO = new UsuarioDAO($pdo);
 </head>
 <body class="bg-light">
 
+<div class="menu_lateral">
+        <span class="pedidos">Pedidos</span>
+        <span class="dados">Meus Dados</span>
+        <span class="enderecos">Endereços</span>
+        <span class="celulares">Telefones</span>
+    </div>
+
+    <div id="conteudo">
+        <h1>Dados Pessoais</h1>
+        <form action="/dados_pessoais" method="post">
+            <label for="nome">Nome Completo</label>
+            <input class="inputs" type="text" id="nome" name="nome" placeholder="" required>
+
+            <label for="nascimento">Data de Nascimento</label>
+            <input class="inputs" type="text" id="nascimento" name="nascimento" placeholder="" required>
+
+            <label for="cpf">CPF</label>
+            <input class="inputs" type="text" id="cpf" name="cpf" placeholder="" required>
+
+            <div class="botoes">
+                <button class="btn_concluir" type="submit">Editar</button>
+            </div>
+        </form>
+    </div>
+
 <div class="container my-5">
     <h1 class="mb-4">Perfil do Usuário</h1>
 

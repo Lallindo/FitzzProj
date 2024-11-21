@@ -39,19 +39,27 @@ if ($_POST) {
 </head>
 <body>
     
-    <h1 class="text-center">Login</h1>
-    
-    <form class="row mx-5 align-items-center" method="post">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
-        <span class="span text-center"><?php echo $msgErr ?></span>
+<div id="conteudo">
+        <img class="logoVertical" src="../Images/logoEmPe.png" alt="Logo">
+        <h1>Entre ou Cadastre-se</h1>
+        <form method="post">
+            <label for="email">Email:</label>
+            <input class="email" type="text" id="email" name="email" placeholder="E-mail" required>
 
-        <a href="registro.php">Ainda não tenho uma conta</a>    
+            <label for="senha"></label>
+            <input class="email" type="password" id="senha" name="senha" placeholder="Senha" required>
 
-        <button class="my-2" type="submit">Login</button>
-    </form> 
+            <p>ou</p>
+
+            <button class="btn_google" type="button">
+                <img src="../Images/google.jpg" alt="Google Login">
+            </button>
+
+            <div class="botoes">
+                <button class="btn_criarAcc" type="button" onclick="window.location.href='registro.php'">Criar conta</button>
+                <button class="btn_entrar" type="submit">Entrar</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
