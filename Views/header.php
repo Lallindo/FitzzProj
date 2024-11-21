@@ -1,5 +1,4 @@
 <?php
-// Registro está funcionando
 session_start();
 
 require_once '../models/conexao.php';
@@ -44,6 +43,8 @@ require_once '../models/daos/pedido.dao.php';
         <div class="container-fluid">
             <a class="navlink-active" href="index.php">Catálogo</a>
             <?php
+            // Se o usuário já estiver logado, altera o header para ter acesso à página de perfil dele, 
+            // caso não esteja, o mesmo local se torna um acesso para o página de registro
                 if (!isset($_SESSION['user_name'])) {
                     echo "<a class='navlink-active' href='login.php'>Faça login</a>";
                 } else {
