@@ -1,6 +1,9 @@
 <?php
 require_once 'header.php';
 
+var_dump($_SESSION);
+var_dump($_COOKIE);
+
 $usuarioDAO = new UsuarioDAO($pdo);
 ?>
 
@@ -12,6 +15,8 @@ $usuarioDAO = new UsuarioDAO($pdo);
     <title>Perfil do Usuário</title>
 </head>
 <body class="bg-light">
+
+<a href="logout.php">LOGOUT</a>
 
 <div class="menu_lateral">
         <span class="pedidos">Pedidos</span>

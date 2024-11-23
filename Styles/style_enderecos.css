@@ -1,0 +1,212 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: whitesmoke;
+}
+
+.img_banner{
+  max-width: 100%;
+  height: auto;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "IBM Plex Serif", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+nav {
+    display: flex;
+    background-color: #F4F4F4;
+    flex-direction: row;
+    padding: 15px 0px 0px 0px;
+    word-spacing: 25px;
+    justify-content: space-around;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    font-size: 20px;
+}
+
+#menu-secundario {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: black;
+    color: #FFFFF0;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.img_menu {
+    margin: 2px 0px 0px 0px;
+    width: 24px;
+    height: 24px;
+}
+
+.icone_menu {
+    width: 18px;
+    height: 18px;
+    margin-top: -5px;
+}
+
+.logo_nav {
+    height: 30px;
+    width: 150px;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+        font-size: 18px;
+    }
+
+    .logo_nav {
+        height: 25px;
+        width: 120px;
+    }
+
+    #menu-secundario {
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    .img_menu, .icone_menu {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav ul li {
+        font-size: 16px;
+    }
+
+    .logo_nav {
+        height: 20px;
+        width: 100px;
+    }
+
+    #menu-secundario {
+        font-size: 10px;
+    }
+
+    .img_menu, .icone_menu {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+#enderecos {
+  display: flex;
+  margin: 20px;
+}
+
+#menu-lateral {
+  width: 20%;
+  border-right: 1px solid #ccc;
+  padding: 20px;
+}
+
+#menu-lateral ul {
+  list-style: none;
+}
+
+#menu-lateral ul li {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+
+#menu-lateral ul li.active {
+  font-weight: bold;
+  color: black;
+  border-left: 3px solid black;
+  padding-left: 10px;
+}
+
+#conteudo-enderecos {
+  width: 80%;
+  padding: 20px;
+}
+
+#conteudo-enderecos h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.endereco {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.endereco h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.endereco-detalhes p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.icone-editar {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.btn-adicionar {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-adicionar:hover {
+  background-color: #0056b3;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

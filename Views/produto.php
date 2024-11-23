@@ -1,24 +1,11 @@
 <?php
 require_once 'header.php';
 
-if ($_GET) {
-    $produto = new Produto(id_produto: $_GET['id_produto']);
-    $produtoDAO = new ProdutoDAO($pdo);
-
-    $retorno = $produtoDAO->buscarPorId($produto)[0];
-}
+$produto = new Produto(id_produto: (int) $_REQUEST['id_prod']);
+$produtoDAO = new ProdutoDAO($pdo);
+$retorno = $produtoDAO->buscarPorId($produto)[0];
+var_dump($retorno);
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produto 1</title>
-</head>
-
-<body class="bg-light">
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,29 +13,26 @@ if ($_GET) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitzz - Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/pagina_produto.css">
-    <link rel="stylesheet" href="./css/nav.css">
-    <link rel="stylesheet" href="./css/footer.css">
+    <title>Produto <?= $retorno->nome_produto ?></title>
 </head>
 
-<body>
-
+<body class="bg-light">
+    <?php
+    echo "<input type='hidden' id='inpId' value={$retorno->id_produto}>";
+    ?>
     <div id="favoritos">
         <div>
             <button class="arrow left" onclick="previousImage()">&#8249;</button>
-            <img id="main-image" src="./imagens/camisetas/deidara-branca-c-1.webp" alt="Camiseta TLOU Branca"
+            <img id="main-image" src="../Images/camisetas/deidara-branca-c-1.webp" alt="Camiseta TLOU Branca"
                 draggable="false">
             <button class="arrow right" onclick="nextImage()">&#8250;</button>
         </div>
-        <div class="titulo_img">
+        <orm class="titulo_img">
 
             <p>
             <div class="titulo_paginaProduto">
-                <span class="nome_produto">Camiseta Deidara Branca</span>
-                <br><img class="avaliacao" src="./imagens/index/estrelas.png" alt="" draggable="false">
+                <span class="nome_produto"><?= $retorno->nome_produto ?></span>
+                <br><img class="avaliacao" src="../Images/index/estrelas.png" alt="" draggable="false">
             </div>
             <div class="cor_paginaProduto">
                 <span class="nome_produto">Cor</span>
@@ -58,21 +42,30 @@ if ($_GET) {
                     <div class="color" style="background-color: #ffffff; border: 1px solid black;"></div>
                 </div>
             </div>
-            <br><span class="preco_produto">R$74,00</span>
-            <br><input type="number" value="1" min="1" max="99"><button class="add_cart">ADICIONAR AO
-                CARRINHO</button><br>
-            <span>Estoque: 50</span>
+            <br><span class="preco_produto">R$ <?= $retorno->preco_produto ?> </span>
+            <div>
+                <button id="Cor1" name="Cor1" class="btnCor" type="button" value="0">COR1</button>
+                <button id="Cor2" name="Cor2" class="btnCor" type="button" value="1">COR2</button>
+                <button id="Cor3" name="Cor3" class="btnCor" type="button" value="2">COR3</button>
+                <button id="Cor4" name="Cor4" class="btnCor" type="button" value="3">COR4</button>
+            </div>
+            <div>
+                <button id="PP" class="btnTam" name="PP" type="button" value="0">PP</button>
+                <button id="P" class="btnTam" name="P" type="button" value="1">P</button>
+                <button id="M" class="btnTam" name="M" type="button" value="2">M</button>
+                <button id="G" class="btnTam" name="G" type="button" value="3">G</button>
+                <button id="GG" class="btnTam" name="GG" type="button" value="4">GG</button>
+            </div>
+            <br><input id="quantCompra" name="quantCompra" type="number" value="1" min="1" max="99">
+            <button id="btnCart" class="add_cart">
+                ADICIONAR AO CARRINHO</button><br>
             </p>
+            </form>
             <h3>DESCRIÇÃO</h3>
-            <h5>A FITZZ apresenta a mais avançada tecnologia<br>
-                em Super DRY. Nossas camisetas combinam o<br>
-                toque suave da poliamida com tecnologia de<br>
-                alta absorção, ideal para quem adora um <br>
-                treino internso. Agora, além de vestir seus <br>
-                personagens favoritos, você pode treinar com <br>
-                suas camisetas favoritos, sem sentir calor.
+            <h5>
+                <?= $retorno->desc_produto ?>
             </h5>
-        </div>
+    </div>
     </div>
 
     <div class="msg_favorito_posicao">
@@ -122,12 +115,9 @@ if ($_GET) {
         </div>
     </div>
 
-    <footer><img src="./imagens/logo_branca.webp" alt=""></footer>
-    <script src="./javascript/pagina_produto.js"></script>
-</body>
-
-</html>
-
+    <footer><img src="../Images/logo_branca.webp" alt=""></footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../scripts/setTam.js"></script>
 </body>
 
 </html>

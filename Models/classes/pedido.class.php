@@ -7,16 +7,16 @@ class Pedido
     private $status_pedido = '';
     private $data_cria_pedido = '';
     private $usuario = null;
-    private $item = [];
+    private $item = null;
     private $endereco = null;
     public function __construct(
         $id_pedido = 0,
         $tipo_pag_pedido = '',
         $status_pedido = '',
         $data_cria_pedido = '',
-        $usuario = '',
-        $item = [],
-        $endereco    
+        $usuario = 0,
+        $item = 0,
+        $endereco = 0
         ) {
         $this->id_pedido = $id_pedido;
         $this->tipo_pag_pedido = $tipo_pag_pedido;
@@ -83,7 +83,7 @@ class Pedido
 
     public function setItem($item)
     {
-        $this->item[] = $item;
+        $this->item = $item;
     }
 
     public function getEnd()

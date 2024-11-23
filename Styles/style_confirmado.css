@@ -1,0 +1,213 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body{
+    background-color: whitesmoke;
+  }
+  
+  .img_banner{
+    max-width: 100%;
+    height: auto;
+  }
+  
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+  
+  * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "IBM Plex Serif", serif;
+      font-weight: 400;
+      font-style: normal;
+  }
+  
+  nav {
+      display: flex;
+      background-color: #F4F4F4;
+      flex-direction: row;
+      padding: 15px 0px 0px 0px;
+      word-spacing: 25px;
+      justify-content: space-around;
+  }
+  
+  nav ul {
+      list-style: none;
+      padding: 0;
+  }
+  
+  nav ul li {
+      display: inline;
+      font-size: 20px;
+  }
+  
+  #menu-secundario {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      background-color: black;
+      color: #FFFFF0;
+      padding: 15px;
+      font-size: 14px;
+  }
+  
+  .img_menu {
+      margin: 2px 0px 0px 0px;
+      width: 24px;
+      height: 24px;
+  }
+  
+  .icone_menu {
+      width: 18px;
+      height: 18px;
+      margin-top: -5px;
+  }
+  
+  .logo_nav {
+      height: 30px;
+      width: 150px;
+  }
+  
+  @media (max-width: 768px) {
+      nav {
+          flex-direction: column;
+          align-items: center;
+      }
+  
+      nav ul {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+  
+      nav ul li {
+          display: block;
+          margin: 10px 0;
+          font-size: 18px;
+      }
+  
+      .logo_nav {
+          height: 25px;
+          width: 120px;
+      }
+  
+      #menu-secundario {
+          flex-direction: column;
+          align-items: center;
+          font-size: 12px;
+      }
+  
+      .img_menu, .icone_menu {
+          width: 20px;
+          height: 20px;
+      }
+  }
+  
+  @media (max-width: 480px) {
+      nav ul li {
+          font-size: 16px;
+      }
+  
+      .logo_nav {
+          height: 20px;
+          width: 100px;
+      }
+  
+      #menu-secundario {
+          font-size: 10px;
+      }
+  
+      .img_menu, .icone_menu {
+          width: 16px;
+          height: 16px;
+      }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #000000;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+}
+
+header .menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+}
+
+header .menu li a {
+    text-decoration: none;
+    color: #333;
+}
+
+header .icons img {
+    width: 24px;
+    margin-left: 15px;
+}
+
+main.pedido-sucesso {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.pedido-sucesso .container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+
+.icone-check img {
+    width: 80px;
+    margin-bottom: 20px;
+}
+
+.pedido-sucesso h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.pedido-sucesso p {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.pedido-sucesso button {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.pedido-sucesso button:hover {
+    background-color: #444;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}

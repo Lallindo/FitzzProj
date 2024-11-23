@@ -38,6 +38,11 @@ require_once '../models/daos/pedido.dao.php';
     <link rel="stylesheet" href="../Styles/login.css">
     <link rel="stylesheet" href="../Styles/dados_pessoais.css">
     <link rel="stylesheet" href="../Styles/index.css">
+    <link rel="stylesheet" href="../Styles/style_carrinho.css">
+    <link rel="stylesheet" href="../Styles/style_finalizar.css">
+    <link rel="stylesheet" href="../Styles/style_pedidos.css">
+    <link rel="stylesheet" href="../Styles/style_dados.css">
+    <link rel="stylesheet" href="../Styles/style_confirmado.css">
     <!-- CDN do BootStrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -65,7 +70,7 @@ require_once '../models/daos/pedido.dao.php';
                 }
             ?>
             
-            <li><img class="icone_menu" src="../Images/shopping-cart.ico" alt="" draggable="false"></li>
+            <li><a href="carrinho.php"><img class="icone_menu" src="../Images/shopping-cart.ico" alt="" draggable="false"></a></li>
             <li><img class="icone_menu" src="../Images/lupa.ico" alt="" draggable="false"></li>
         </ul>
     </nav>

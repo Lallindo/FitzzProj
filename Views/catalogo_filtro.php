@@ -32,7 +32,9 @@ var_dump($retorno);
                 echo
                 "<div class='col-lg-4 col-md-6'>
                     <div class='card'>
-                        <img src='../Images/camisetas/deidara-branca-c-1.webp' class='card-img-top' alt='Produto 1'>
+                        <a href='produto.php?id_prod={$produto->id_produto}'>
+                            <img src='../Images/camisetas/deidara-branca-c-1.webp' class='card-img-top' alt='Produto 1'>
+                        </a>
                         <div class='card-body'>
                             <h5 class='card-title'>{$produto->nome_produto}</h5>
                             <p class='card-text'>R$ {$produto->preco_produto}</p>
