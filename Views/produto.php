@@ -4,7 +4,6 @@ require_once 'header.php';
 $produto = new Produto(id_produto: (int) $_REQUEST['id_prod']);
 $produtoDAO = new ProdutoDAO($pdo);
 $retorno = $produtoDAO->buscarPorId($produto)[0];
-var_dump($retorno);
 ?>
 
 <!DOCTYPE html>

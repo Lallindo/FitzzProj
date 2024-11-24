@@ -1,10 +1,10 @@
 <?php
-if (isset($_SESSION['user_id'])) {
-    $_SESSION['user_id'] = null;
-    $_COOKIE['PHPSESSID'] = null;
-    session_destroy();    
-    header('location: login.php');
-} else {
-    header('location: perfil.php');
-}
+require_once "header.php";
 
+if (isset($_SESSION['user_id'])) {
+    // Tira os dados da sessão
+    $_SESSION = [];
+    // Destroi a sessão
+    session_destroy();
+    header('location: login.php');
+}

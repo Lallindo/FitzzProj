@@ -41,5 +41,13 @@ class PedidoDAO
             'datacriacao_pedido' => $pedido->getData()
         ]);
     }
+
+    public function remover($pedido) {
+        $sql = "DELETE FROM pedidos where id_pedido = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $pedido->getId()
+        ]);
+    }
 }
 

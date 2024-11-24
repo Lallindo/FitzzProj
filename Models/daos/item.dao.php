@@ -13,7 +13,7 @@ class ItemDAO
         // Funcionamento já verificado
         $sql = "SELECT * FROM itens WHERE id_item = :item";
         $stmt = $this->pdo->prepare($sql);
-        $item = $item->getId();
+        $item = $item->getId(); 
         $stmt->execute(['item' => $item]);  
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
@@ -38,6 +38,14 @@ class ItemDAO
             'quant' => $item->getQuant()
         ]);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function remover($item) {
+        $sql = "DELETE FROM itens WHERE id_item = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $item->getId()
+        ]);
     }
 }
 

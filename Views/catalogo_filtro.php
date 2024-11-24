@@ -8,7 +8,7 @@ $retorno = $produtoDAO->buscarSubstring($produto);
 
 // var_dump($produtoDAO->buscarTodos());
 
-var_dump($retorno);
+// var_dump($retorno);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,10 @@ var_dump($retorno);
 
         <div class="row g-4">
             <?php
-            foreach ($retorno as $produto) 
+            if (empty($retorno)) {
+                echo "Nenhum item adicionado";
+            } else {
+                foreach ($retorno as $produto) 
                 // Imagem tem que referenciar o id do produto
                 // IMG= ../Images/{$imagem do produto}
                 // Link = ../produto.php?id_produto={$produto->id}
@@ -42,6 +45,7 @@ var_dump($retorno);
                     </div>
                 </div>";
             
+            }
             
             ?>
         </div>
