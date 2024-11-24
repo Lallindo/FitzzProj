@@ -10,7 +10,7 @@ class Item
         $quant_item = '',
         $id_espec_item = 0
     ) {
-        var_dump($id_espec_item);
+        // var_dump($id_espec_item);
         $this->id_item = $id_item;
         $this->quant_item = $quant_item;
         $this->espec = new Especificacao($id_espec_item, '', '', 0, []);
