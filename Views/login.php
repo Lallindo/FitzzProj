@@ -27,6 +27,9 @@ if ($_POST) {
     } 
 
     var_dump($_SESSION['user_id']);
+    if (isset($_SESSION['saved_id'])) {
+        header('location: add_carrinho.php');
+    }
 } 
 ?>
 

@@ -4,14 +4,26 @@ require_once "header.php";
 // Usuário deve estar logado antes de fazer a compra, os dados do item feito podem ser salvos na session
 
 var_dump($_REQUEST);
-
-$produto = new Produto($_REQUEST['id_prod'], 0, '', '', $_REQUEST['cor_espec'], $_REQUEST['tam_espec'], $_REQUEST['quant_espec'], []);
+if (isset($_SESSION['saved_id'])) {
+    $produto = new Produto($_SESSION['saved_id'], 0, '', '', $_SESSION['saved_cor'], $_SESSION['saved_tam'], $_SESSION['saved_quant'], []);
+} else {
+    $produto = new Produto($_REQUEST['id_prod'], 0, '', '', $_REQUEST['cor_espec'], $_REQUEST['tam_espec'], $_REQUEST['quant_espec'], []);
+}
 
 // Dentro do $produto temos a Cor, Tamanho e Quantidade da compra
 
+
 if (!isset($_SESSION['user_id'])) {
-    $_SESSION['saved_item'] = $produto;
+    $_SESSION['saved_id'] = $_REQUEST['id_prod']; 
+    $_SESSION['saved_cor'] = $_REQUEST['cor_espec'];
+    $_SESSION['saved_tam'] = $_REQUEST['tam_espec'];
+    $_SESSION['saved_quant'] = $_REQUEST['quant_espec'];
+    header('location: login.php');
 } else {
+    unset($_SESSION['saved_id']);
+    unset($_SESSION['saved_cor']);
+    unset($_SESSION['saved_tam']);
+    unset($_SESSION['saved_quant']);
     // ProdutoDAO usado para conseguir o ID da especificação
     $produtoDAO = new ProdutoDAO($pdo);
     $id_espec = $produtoDAO->buscarEspecItem($produto)[0]->id_espec;
@@ -35,6 +47,7 @@ if (!isset($_SESSION['user_id'])) {
         $id_endereco
     );
 
+    var_dump($_SESSION);
     var_dump($pedido->getItem());
     $pedidoDAO = new PedidoDAO($pdo);
 

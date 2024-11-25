@@ -11,6 +11,7 @@ class Usuario
     private $datanasc_usuario = '';
     private $telefones = [];
     private $enderecos = [];
+    private $admin = 0;
 
     public function __construct(
         $id_usuario = 0,
@@ -26,7 +27,8 @@ class Usuario
         $bairro_end = '',
         $cidade_end = '',
         $estado_end = '',
-        $cep_end = ''
+        $cep_end = '',
+        $admin = 0
     ) {
         $this->id_usuario = $id_usuario;
         $this->nomecomp_usuario = $nomecomp_usuario;
@@ -43,6 +45,7 @@ class Usuario
             $rua_end, $bairro_end, $cidade_end,
             $estado_end, $cep_end
         );
+        $this->admin = $admin;
     }
 
     public function getId()
@@ -136,6 +139,14 @@ class Usuario
         // new Endereco
         $this->enderecos[] = new Endereco(0, $tipo_end, $rua_end, $bairro_end, $cidade_end, $estado_end, $cep_end);
     }
+
+    public function getAdmin() {
+        return $this->admin;
+    }
+
+    public function setAdmin($admin) {
+        $this->admin = $admin;
+    } 
 }
 
 ?>

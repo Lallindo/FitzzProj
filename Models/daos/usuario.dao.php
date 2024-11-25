@@ -53,6 +53,15 @@ class UsuarioDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function buscarPedidoEmAberto($usuario) {
+        $sql = "SELECT * FROM pedidos WHERE id_usuario_pedido = :id AND status_pedido IS NULL";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $usuario->getId()
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function registrarUsuario($usuario) {
         // Funcionamento já verificado
         $sql_user = "INSERT INTO usuarios 

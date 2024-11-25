@@ -4,6 +4,14 @@ var_dump($_SESSION);
 var_dump($_REQUEST);
 
 $valor_total = 0.0;
+$tipo_pagamento = null;
+if ($_REQUEST['tipo'] === 'pix') {
+    $tipo_pagamento = 0;
+} else if ($_REQUEST['tipo'] === 'boleto') {
+    $tipo_pagamento = 1;
+} else {
+    $tipo_pagamento = 2;
+}
 
 $usuario = new Usuario($_SESSION['user_id']);
 $usuarioDAO = new UsuarioDAO($pdo);
@@ -24,14 +32,9 @@ foreach($itens as $item) {
     $valor_total += $valor_produto * $item->quantidade_item;
 }
 
-
-// $
-
-var_dump($valor_total);
-
-$pedido->setValor(10);
-
-var_dump($pedido);
-
-
+$pedido->setValor($valor_total);
+$pedido->setTipo('Pendente');
+$pedido->setStatus('Pendente');
+$pedido->setTipo($tipo_pagamento);
+$pedidoDAO->finalizarPedido($pedido);
 ?>

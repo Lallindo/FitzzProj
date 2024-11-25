@@ -28,7 +28,7 @@ if ($_POST) {
     $usuario = new Usuario(
         0, $nome, $cpfBD, $email,
         $senha, date('Y/m/d'), $dataNasc, 
-        $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $estado, $cepBD
+        $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $estado, $cepBD, 0
     );
 
     $usuarioDAO = new UsuarioDAO($pdo);

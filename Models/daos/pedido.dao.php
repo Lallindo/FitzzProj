@@ -45,11 +45,13 @@ class PedidoDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
-    public function alterarValorTotal($pedido) {
-        $sql = "UPDATE pedidos SET valor_pedido = :valor WHERE id_pedido = :id";
+    public function finalizarPedido($pedido) {
+        $sql = "UPDATE pedidos SET valor_pedido = :valor, pagamento_pedido = :pag, status_pedido = :stat, datacriacao_pedido = CURRENT_DATE WHERE id_pedido = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
             'valor' => $pedido->getValor(),
+            'pag' => $pedido->getTipo(),
+            'stat' => $pedido->getStatus(),
             'id' => $pedido->getId()
         ]);
     }

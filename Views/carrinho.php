@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
 } else {
     $usuario = new Usuario($_SESSION['user_id']);
     $usuarioDAO = new UsuarioDAO($pdo);
-    $id_pedido = $usuarioDAO->buscarPedido($usuario);
+    $id_pedido = $usuarioDAO->buscarPedidoEmAberto($usuario);
     // Devemos checar se o pedido está aberto
     $pedido = new Pedido($id_pedido[0]->id_pedido);
     $pedidoDAO = new PedidoDAO($pdo);
