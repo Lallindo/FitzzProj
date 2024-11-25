@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 23/11/2024 às 20:45
+-- Tempo de geração: 25/11/2024 às 15:06
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.2.18
 
@@ -197,19 +197,21 @@ INSERT INTO `especificacoes` (`id_espec`, `id_prod_espec`, `cor_espec`, `tamanho
 DROP TABLE IF EXISTS `itens`;
 CREATE TABLE IF NOT EXISTS `itens` (
   `id_item` int NOT NULL AUTO_INCREMENT,
+  `id_pedido_item` int NOT NULL,
   `id_espec_item` int NOT NULL,
   `quantidade_item` int NOT NULL,
   PRIMARY KEY (`id_item`),
-  KEY `id_espec_item` (`id_espec_item`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `id_espec_item` (`id_espec_item`),
+  KEY `id_pedido_item` (`id_pedido_item`)
+) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `itens`
 --
 
-INSERT INTO `itens` (`id_item`, `id_espec_item`, `quantidade_item`) VALUES
-(19, 12, 1),
-(18, 15, 1);
+INSERT INTO `itens` (`id_item`, `id_pedido_item`, `id_espec_item`, `quantidade_item`) VALUES
+(50, 19, 55, 1),
+(46, 19, 62, 3);
 
 -- --------------------------------------------------------
 
@@ -221,24 +223,23 @@ DROP TABLE IF EXISTS `pedidos`;
 CREATE TABLE IF NOT EXISTS `pedidos` (
   `id_pedido` int NOT NULL AUTO_INCREMENT,
   `id_endereco_pedido` int NOT NULL,
-  `id_item_pedido` int NOT NULL,
   `id_usuario_pedido` int NOT NULL,
+  `valor_pedido` int NOT NULL,
   `pagamento_pedido` int DEFAULT NULL,
   `status_pedido` int DEFAULT NULL,
   `datacriacao_pedido` date DEFAULT NULL,
   PRIMARY KEY (`id_pedido`),
   KEY `id_endereco_pedido` (`id_endereco_pedido`),
-  KEY `id_item_pedido` (`id_item_pedido`),
   KEY `id_usuario_pedido` (`id_usuario_pedido`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `id_endereco_pedido`, `id_item_pedido`, `id_usuario_pedido`, `pagamento_pedido`, `status_pedido`, `datacriacao_pedido`) VALUES
-(7, 14, 19, 41, NULL, NULL, NULL),
-(6, 14, 18, 41, NULL, NULL, NULL);
+INSERT INTO `pedidos` (`id_pedido`, `id_endereco_pedido`, `id_usuario_pedido`, `valor_pedido`, `pagamento_pedido`, `status_pedido`, `datacriacao_pedido`) VALUES
+(19, 14, 41, 10, NULL, NULL, NULL),
+(20, 0, 0, 0, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
