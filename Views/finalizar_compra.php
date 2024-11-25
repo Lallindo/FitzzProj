@@ -1,5 +1,23 @@
 <?php
 require_once "header.php";
+
+echo "<br><br><br><br><br><br><br><br>";
+
+$usuario = new Usuario($_SESSION['user_id']);
+$usuarioDAO = new UsuarioDAO($pdo);
+
+$id_pedido = $usuarioDAO->buscarPedido($usuario)[0]->id_pedido;
+
+$pedido = new Pedido($id_pedido);
+$pedidoDAO = new PedidoDAO($pdo);
+
+$retorno = $pedidoDAO->buscarItens($pedido);
+
+var_dump($retorno);
+
+if (empty($retorno)) {
+    header('location: index.php');
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,19 +48,65 @@ require_once "header.php";
     </div>
     <main>
         <section class="carrinho">
-            <h1>CARRINHO</h1>
+            <h1>REVISE SEU PEDIDO</h1>
             <div class="produtos">
-                <div class="produto">
-                    <img src="../Images/camisetas/tlou-branca-c-2.webp" alt="Camiseta TLOU">
-                    <p>01 Camiseta TLOU - Branca - M</p>
-                </div>
-                <div class="produto">
-                    <img src="../Images//camisetas/demon-preta-f-1.webp" alt="Camiseta Hanzo">
-                    <p>01 Camiseta DEMON - Preta - M</p>
-                </div>
+                <?php
+
+                $especDAO = new EspecificacaoDAO($pdo);
+                $produtoDAO = new ProdutoDAO($pdo);
+
+                // SRC da imagem deve ser trocada pelo valor do banco
+                foreach ($retorno as $pedido) {
+                    $espec = $especDAO->buscarPorId(new Especificacao($pedido->id_espec_item))[0];
+                    $produto = $produtoDAO->buscarPorId(new Produto($espec->id_prod_espec))[0];
+
+                    if ($espec->cor_espec === '0') {
+                        $cor = 'Preta';
+                    } else if ($espec->cor_espec === '1') {
+                        $cor = 'Branca';
+                    } else if ($espec->cor_espec === '2') {
+                        $cor = 'Azul';
+                    } else {
+                        $cor = 'Cinza';
+                    }
+
+                    if ($espec->tamanho_espec === '0') {
+                        $tamanho = 'PP';
+                    } else if ($espec->tamanho_espec === '1') {
+                        $tamanho = 'P';
+                    } else if ($espec->tamanho_espec === '2') {
+                        $tamanho = 'M';
+                    } else if ($espec->tamanho_espec === '3') {
+                        $tamanho = 'G';
+                    } else {
+                        $tamanho = 'GG';
+                    }
+
+                    $valor_total = $pedido->quantidade_item * $produto->preco_produto;
+
+                    $produto->preco_produto = number_format($produto->preco_produto, 2, ',', '.');
+                    $valor_total = number_format($valor_total, 2, ',', '.');
+                    // var_dump($item);
+                    echo "
+        <hr>
+        <div class='item-carrinho'>
+        
+            <img src='../Images/camisetas/demon-preta-f-1.webp' alt='Camiseta DEMON' class='imagem-produto' />
+            <div class='detalhes-produto'>
+                <h2>{$produto->nome_produto}</h2>
+                <p>{$cor} - {$tamanho}</p>
+                <p>{$pedido->quantidade_item}x R$ {$produto->preco_produto}</p>
+            </div>
+            <div class='preco-produto'>R$ {$valor_total}</div>
+            <button class='remover-item' value={$pedido->id_item}>🗑️</button>
+        </div>
+        <hr />";
+                }
+
+                ?>
             </div>
             <div class="total">
-                <p><strong>Total: R$148,00</strong></p>
+                <p id="valor-total" style="font-weight:bold">Total: R$148,00</p>
             </div>
             <div class="pagamento">
                 <h2>Modo de Pagamento:</h2>
@@ -50,26 +114,27 @@ require_once "header.php";
                     <label>
                         <img src="../Images/pix.png" alt="Pix">
                         <span>Pix</span>
-                        <input type="radio" name="pagamento" value="pix" onclick="mostrarFormaPagamento('pix')">
+                        <input type="radio" class="radio-pag" name="pagamento" value="pix">
                     </label>
                     <label>
                         <img src="../Images/boleto.png" alt="Boleto">
                         <span>Boleto</span>
-                        <input type="radio" name="pagamento" value="boleto" onclick="mostrarFormaPagamento('boleto')">
+                        <input type="radio" class="radio-pag" name="pagamento" value="boleto">
                     </label>
                     <label>
                         <img src="../Images/cartão.png" alt="Cartão">
                         <span>Cartão</span>
-                        <input type="radio" name="pagamento" value="cartao" onclick="mostrarFormaPagamento('cartao')">
+                        <input type="radio" class="radio-pag" name="pagamento" value="cartao">
                     </label>
                 </div>
                 <div id="forma-pagamento" class="forma-pagamento">
-                <button class="btn" type="button">COMPRAR</button>
+                    <button id="btn-finalizar-compra" class="btn" type="submit">COMPRAR</button>
                 </div>
             </div>
         </section>
     </main>
-    <script src="../script/pagamento.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="../scripts/finalizarPag.js"></script>
 </body>
 
 </html>

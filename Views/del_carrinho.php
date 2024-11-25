@@ -1,19 +1,11 @@
 <?php
 require_once 'header.php';
-$pedido = new Pedido($_REQUEST['id_ped']);
+$id_item = $_REQUEST['id_item'];
 
-$pedidoDAO = new PedidoDAO($pdo);
-$retorno = $pedidoDAO->buscarPorId($pedido);
-
-var_dump($retorno[0]->id_item_pedido);
-
-$item = new Item($retorno[0]->id_item_pedido);
+$item = new Item($id_item);
 $itemDAO = new ItemDAO($pdo);
 
-var_dump($item);
-
-$itemDAO->remover($item);   
-$pedidoDAO->remover($pedido);
+$itemDAO->remover($item);
 
 header('location: carrinho.php');
 ?>

@@ -5,49 +5,55 @@ require_once "header.php";
 
 var_dump($_REQUEST);
 
-$produto = new Produto(
-    $_REQUEST['id_prod'],
-    0,
-    '',
-    '',
-    $_REQUEST['cor_espec'],
-    $_REQUEST['tam_espec'],
-    $_REQUEST['quant_espec'],
-    []
-);
-$produtoDAO = new ProdutoDAO($pdo);
-$especPedido = $produto->getEspec()[0];
-$especBanco = $produtoDAO->buscarEspecItem($produto);
-$item = new Item(0, $especPedido->getQuant(), $especBanco[0]->id_espec);
-// Tudo acima deve ser feito mesmo se o usuário não estiver logado
+$produto = new Produto($_REQUEST['id_prod'], 0, '', '', $_REQUEST['cor_espec'], $_REQUEST['tam_espec'], $_REQUEST['quant_espec'], []);
 
-if (!isset($_SESSION['user_id'])) {    
-    $_SESSION['saved_item'] = $item;
+// Dentro do $produto temos a Cor, Tamanho e Quantidade da compra
+
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['saved_item'] = $produto;
 } else {
-    // Apenas se ele estiver logado o código seguinte deve rodar
+    // ProdutoDAO usado para conseguir o ID da especificação
+    $produtoDAO = new ProdutoDAO($pdo);
+    $id_espec = $produtoDAO->buscarEspecItem($produto)[0]->id_espec;
+    // Criação do Item
+    $item = new Item(0, $produto->getEspec()[0]->getQuant(), $id_espec);
     $itemDAO = new ItemDAO($pdo);
-    $itemDAO->inserir($item);
-    $usuario = new Usuario($_SESSION['user_id']);
+    // UsuarioDAO usado para conseguir o ID do endereço do usuário
     $usuarioDAO = new UsuarioDAO($pdo);
-    
-    $pedido = new Pedido
-    (0, 
-    null, 
-    null, 
-    null, 
-    $_SESSION['user_id'], 
-    $itemDAO->buscarIdAposInserido($item),
-    $usuarioDAO->buscarEndereco($usuario)[0]
+    $id_endereco = $usuarioDAO->buscarEndereco(new Usuario($_SESSION['user_id']))[0]->id_endereco;
+
+    $pedido = new Pedido(
+        0, 
+        null, 
+        null, 
+        null, 
+        0,
+        $_SESSION['user_id'], 
+        $item->getId(), 
+        $item->getQuant(), 
+        $item->getEspec()->getId(),
+        $id_endereco
     );
-    
-    var_dump($pedido);
-    
+
+    var_dump($pedido->getItem());
     $pedidoDAO = new PedidoDAO($pdo);
-    
-    $pedidoDAO->inserir($pedido);
+
+    $retorno = $pedidoDAO->buscarPedidoEmAberto($pedido);
+
+    if (empty($retorno)) {
+        $pedidoDAO->inserir($pedido);
+        $pedidoDAO->inserirItem($pedido);
+    } else {
+        $pedidoDAO->inserirItem($pedido);
+    }
+
+    // Antes de inserir um item temos que saber se existe um pedido em aberto ou se devemos criar um novo
+
+    // $itemDAO->inserir($item);
+    // $id_item = $itemDAO->buscarIdAposInserido($item);
+
 }
 
-// $pedido = new Pedido(0, null, null, date(), $_SESSION['user_id'],)
 
 
 // Criar um item

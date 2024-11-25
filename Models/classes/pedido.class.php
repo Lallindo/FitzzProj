@@ -6,25 +6,30 @@ class Pedido
     private $tipo_pag_pedido = '';
     private $status_pedido = '';
     private $data_cria_pedido = '';
+    private $valor_pedido = 0;
     private $usuario = null;
-    private $item = null;
+    private $item = [];
     private $endereco = null;
     public function __construct(
         $id_pedido = 0,
         $tipo_pag_pedido = '',
         $status_pedido = '',
         $data_cria_pedido = '',
-        $usuario = 0,
-        $item = 0,
-        $endereco = 0
+        $valor_pedido = 0,
+        $id_usuario = 0,
+        $id_item = '',
+        $quant_item = '',
+        $id_espec_item = 0,
+        $id_endereco = 0
         ) {
         $this->id_pedido = $id_pedido;
         $this->tipo_pag_pedido = $tipo_pag_pedido;
         $this->status_pedido = $status_pedido;
         $this->data_cria_pedido = $data_cria_pedido;
-        $this->usuario = $usuario;
-        $this->item = $item;
-        $this->endereco = $endereco;
+        $this->valor_pedido = $valor_pedido;
+        $this->usuario = new Usuario($id_usuario);
+        $this->item[] = new Item($id_item, $quant_item, $id_espec_item);
+        $this->endereco = new Endereco($id_endereco);
     }
 
     public function getId()
@@ -66,6 +71,15 @@ class Pedido
     {
         $this->data_cria_pedido = $data;
     }
+
+    public function getValor() {
+        return $this->valor_pedido;
+    }
+
+    public function setValor($valor) {
+        $this->valor_pedido = $valor;
+    }
+
     public function getUser()
     {
         return $this->usuario;
@@ -81,9 +95,9 @@ class Pedido
         return $this->item;
     }
 
-    public function setItem($item)
+    public function setItem($id_item, $quant_item, $id_espec_item)
     {
-        $this->item = $item;
+        $this->item = new Item($id_item, $quant_item, $id_espec_item);
     }
 
     public function getEnd()
