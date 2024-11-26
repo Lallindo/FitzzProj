@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 25/11/2024 às 15:06
+-- Tempo de geração: 26/11/2024 às 21:34
 -- Versão do servidor: 8.3.0
 -- Versão do PHP: 8.2.18
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `enderecos` (
   `cep_endereco` char(8) NOT NULL,
   PRIMARY KEY (`id_endereco`),
   KEY `id_usuario_endereco` (`id_usuario_endereco`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `enderecos`
@@ -61,7 +61,9 @@ INSERT INTO `enderecos` (`id_endereco`, `id_usuario_endereco`, `tipo_endereco`, 
 (13, 40, 'E', 'Rua Doutor Newton Ferraz de Marinis, 50', 'Jardim Maria Luiza II', 'Jaú', 'Sã', '17203040'),
 (14, 41, 'E', 'Rua Doutor Afonso Mendes Braga, 45', 'Vila São Judas Tadeu', 'Jaú', 'Sã', '17207610'),
 (15, 44, 'E', ', ', 'Jardim Maria Luiza II', 'Jaú', 'SP', '17203040'),
-(16, 45, 'E', 'Rua Doutor Newton Ferraz de Marinis, 50', 'Jardim Maria Luiza II', 'Jaú', 'SP', '17203040');
+(16, 45, 'E', 'Rua Doutor Newton Ferraz de Marinis, 50', 'Jardim Maria Luiza II', 'Jaú', 'SP', '17203040'),
+(17, 46, 'E', 'Rua Doutor Newton Ferraz de Marinis, 50', 'Jardim Maria Luiza II', 'Jaú', 'SP', '17203040'),
+(18, 47, 'E', 'Rua Doutor Newton Ferraz de Marinis, 50', 'Jardim Maria Luiza II', 'Jaú', 'SP', '17203040');
 
 -- --------------------------------------------------------
 
@@ -203,15 +205,15 @@ CREATE TABLE IF NOT EXISTS `itens` (
   PRIMARY KEY (`id_item`),
   KEY `id_espec_item` (`id_espec_item`),
   KEY `id_pedido_item` (`id_pedido_item`)
-) ENGINE=MyISAM AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `itens`
 --
 
 INSERT INTO `itens` (`id_item`, `id_pedido_item`, `id_espec_item`, `quantidade_item`) VALUES
-(50, 19, 55, 1),
-(46, 19, 62, 3);
+(53, 22, 35, 1),
+(52, 21, 37, 1);
 
 -- --------------------------------------------------------
 
@@ -231,15 +233,15 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   PRIMARY KEY (`id_pedido`),
   KEY `id_endereco_pedido` (`id_endereco_pedido`),
   KEY `id_usuario_pedido` (`id_usuario_pedido`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `pedidos`
 --
 
 INSERT INTO `pedidos` (`id_pedido`, `id_endereco_pedido`, `id_usuario_pedido`, `valor_pedido`, `pagamento_pedido`, `status_pedido`, `datacriacao_pedido`) VALUES
-(19, 14, 41, 10, NULL, NULL, NULL),
-(20, 0, 0, 0, NULL, NULL, NULL);
+(22, 18, 47, 20, 1, 0, '2024-11-26'),
+(21, 12, 39, 20, 0, 0, '2024-11-26');
 
 -- --------------------------------------------------------
 
@@ -282,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `telefones` (
   `numero_telefone` varchar(20) NOT NULL,
   PRIMARY KEY (`id_telefone`),
   KEY `id_usuario_telefone` (`id_usuario_telefone`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `telefones`
@@ -294,14 +296,13 @@ INSERT INTO `telefones` (`id_telefone`, `id_usuario_telefone`, `numero_telefone`
 (12, 36, '14997702848'),
 (11, 35, '14997702848'),
 (10, 34, '14997702848'),
-(15, 39, '14997702848'),
 (16, 40, ''),
 (17, 41, '14997922773'),
-(18, 39, '1'),
 (19, 42, '14997702848'),
 (20, 43, '14997702848'),
 (21, 44, '14997702848'),
-(22, 45, '14997702848');
+(22, 45, '14997702848'),
+(30, 47, '12345678910');
 
 -- --------------------------------------------------------
 
@@ -320,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `datanasc_usuario` date NOT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `email_usuario` (`email_usuario`)
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `usuarios`
@@ -329,7 +330,9 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 INSERT INTO `usuarios` (`id_usuario`, `nomecomp_usuario`, `cpf_usuario`, `email_usuario`, `senha_usuario`, `datacriacao_usuario`, `datanasc_usuario`) VALUES
 (41, 'Marcelo de Paula', '49252521860', 'marcelo@email.com', '$2y$10$yvi3o4RpFu7eaan0zPOh1eAsfc0xx/tirjgGosC48EvElrZ2uiVcu', '2024-11-18', '2002-10-12'),
 (39, 'Bruno Lallo', '51214740839', 'bruno@email.com', '$2y$10$GFMwzLkVLPKbqCcxvzDA/uQXfDlBaCyunDwKL4gsnpDXnqnaJ8mxu', '2024-11-18', '2003-10-16'),
-(45, 'Lian', '51214740839', 'lian@email.com', '$2y$10$.5LuDTyQJCrjPsrQOzokd.oo0MIoJCC9BoISgJ8xQ.QkihFZzXuRW', '2024-11-21', '2003-10-10');
+(45, 'Lian', '51214740839', 'lian@email.com', '$2y$10$.5LuDTyQJCrjPsrQOzokd.oo0MIoJCC9BoISgJ8xQ.QkihFZzXuRW', '2024-11-21', '2003-10-10'),
+(46, 'Bruno Lallo', '51214740839', 'bruno2@email.com', '$2y$10$Fo60yvtm8SROMkXl4wtFJu5LIMxRINCPfeG9UDI6snANS9GlWeI5C', '2024-11-26', '2003-10-16'),
+(47, 'Bruno', '51214740839', 'bruno3@email.com', '$2y$10$TfQbsRhPDbvaBFBXi6h5NesFiZ.BT.G4Q0Dc2.zqAuZyxFRkSDeHq', '2024-11-26', '2003-10-15');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
