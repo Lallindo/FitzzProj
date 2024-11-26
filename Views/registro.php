@@ -41,6 +41,7 @@ if ($_POST) {
 
     var_dump($usuario);
 
+    header('location:login.php');
     // -- Tirar os pontos e barras do CEP e CPF para adicionar no bd-- 
 }
 ?>

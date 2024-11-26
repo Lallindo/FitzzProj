@@ -15,8 +15,7 @@ if (sizeof($telefones) <= 1) {
 } else {
     $usuarioAlt = new Usuario($_SESSION['user_id'], '', '', '', '', '', '', $telefones[(int) $_REQUEST['id']]->id_telefone, '', '', '', '', '', '', '', 0);
     $usuarioDAO->removerTel($usuarioAlt);
-    var_dump($usuarioAlt);
+    header('location:perfil.php');
 }
 
-header('location:perfil.php');
 ?>

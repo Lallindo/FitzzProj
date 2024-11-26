@@ -53,17 +53,19 @@ $usuarioDAO = new UsuarioDAO($pdo);
                     <th>Ação</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="tel-body">
                 <?php
                     $i = 0;
                     foreach($usuarioDAO->buscarTelefone(new Usuario(id_usuario: $_SESSION['user_id'])) as $tel) {
                         echo 
-                        "<tr>
-                            <td><input id='inp-tel-{$i}' value='{$tel->numero_telefone}' type='tel' maxlength='11'></td>
+                        "<tr id='tr-{$i}'>
+                            <td>
+                                <input id='inp-tel-{$i}' value='{$tel->numero_telefone}' type='tel' maxlength='11'>
+                            </td>
                             <td>    
-                                <button class='btn btn-success btn-sm alt-tel'>Adicionar</button>
-                                <button id='tel-alt-{$i}' class='btn btn-warning btn-sm'>Alterar</button>
-                                <button id='tel-rem-{$i}' class='btn btn-danger btn-sm'>Remover</button>
+                                <button class='btn btn-success btn-sm add-tel'>Adicionar</button>
+                                <button id='alt-tel-{$i}' class='btn btn-warning btn-sm alt-tel'>Alterar</button>
+                                <button id='rem-tel-{$i}' class='btn btn-danger btn-sm rem-tel'>Remover</button>
                             </td>
                         </tr>";
                     $i++;
@@ -124,9 +126,9 @@ $usuarioDAO = new UsuarioDAO($pdo);
                         echo 
                         "<tr>
                             <td>{$ped->id_pedido}</td>
-                            <td>{$ped->id_endereco_pedido}</td>
                             <td>{$ped->datacriacao_pedido}</td>
                             <td>{$ped->status_pedido}</td> 
+                            <td>R$ {$ped->valor_pedido}</td> 
                         </tr>";
                     }
                 ?>

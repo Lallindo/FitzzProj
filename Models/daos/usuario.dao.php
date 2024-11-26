@@ -62,6 +62,16 @@ class UsuarioDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function adicionarTel($usuario) {
+        $sql = "INSERT INTO telefones (id_telefone, id_usuario_telefone, numero_telefone) VALUES (:id, :id_usuario, :num)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $usuario->getTel()[0]->getId(),
+            'id_usuario' => $usuario->getId(),
+            'num' => $usuario->getTel()[0]->getNum()
+        ]);
+    }
+
     public function alterarTel($usuario) {
         $sql = "UPDATE telefones SET numero_telefone = :tel WHERE id_usuario_telefone = :id_usuario AND id_telefone = :id_telefone";
         $stmt = $this->pdo->prepare($sql);
