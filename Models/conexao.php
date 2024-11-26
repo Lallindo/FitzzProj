@@ -4,7 +4,7 @@ $host = 'localhost';
 $bd = 'fitzz_db';
 // user e password para o seus dados
 $user = 'root';
-$password = '';
+$password = 'Fatec@123';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$bd;charset=$charset";

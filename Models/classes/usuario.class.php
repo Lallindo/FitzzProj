@@ -21,6 +21,7 @@ class Usuario
         $senha_usuario = '',
         $datacriacao_usuario = '',
         $datanasc_usuario = '',
+        $id_telefone = 0,
         $numero_telefone = '',
         $tipo_end = '',
         $rua_end = '',
@@ -38,7 +39,7 @@ class Usuario
         $this->datacriacao_usuario = $datacriacao_usuario;
         $this->datanasc_usuario = $datanasc_usuario;
         $this->telefones[] = new Telefone(
-            0, $numero_telefone
+            $id_telefone, $numero_telefone
         );
         $this->enderecos[] = new Endereco(
             0, $tipo_end, 

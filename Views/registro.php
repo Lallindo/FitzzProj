@@ -28,12 +28,16 @@ if ($_POST) {
     $usuario = new Usuario(
         0, $nome, $cpfBD, $email,
         $senha, date('Y/m/d'), $dataNasc, 
-        $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $estado, $cepBD, 0
+        0, $numero, 'E', $rua . ', ' . $num, $bairro, $cidade, $estado, $cepBD, 0
     );
 
     $usuarioDAO = new UsuarioDAO($pdo);
 
     $usuarioDAO->registrarUsuario($usuario);
+
+    if (isset($_SESSION['saved_id'])) {
+        header('location: add_carrinho.php');
+    }
 
     var_dump($usuario);
 

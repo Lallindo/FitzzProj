@@ -26,7 +26,6 @@ if ($_POST) {
         $msgErr = "Email ou senha incorretos!";
     } 
 
-    var_dump($_SESSION['user_id']);
     if (isset($_SESSION['saved_id'])) {
         header('location: add_carrinho.php');
     }

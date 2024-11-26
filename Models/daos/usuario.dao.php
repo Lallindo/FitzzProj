@@ -62,6 +62,25 @@ class UsuarioDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function alterarTel($usuario) {
+        $sql = "UPDATE telefones SET numero_telefone = :tel WHERE id_usuario_telefone = :id_usuario AND id_telefone = :id_telefone";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'tel' => $usuario->getTel()[0]->getNum(),
+            'id_usuario' => $usuario->getId(),
+            'id_telefone' => $usuario->getTel()[0]->getId()
+        ]);
+    }
+
+    public function removerTel($usuario) {
+        $sql = "DELETE FROM telefones WHERE id_telefone = :id_tel AND id_usuario_telefone = :id_usuario";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id_tel' => $usuario->getTel()[0]->getId(),
+            'id_usuario' => $usuario->getId()
+        ]);
+    }
+
     public function registrarUsuario($usuario) {
         // Funcionamento já verificado
         $sql_user = "INSERT INTO usuarios 
