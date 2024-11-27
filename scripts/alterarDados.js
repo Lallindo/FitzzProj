@@ -107,3 +107,14 @@ $('body').on("keypress", '#inp-cep-new', function () {
             cep.value += '';
         }
     }
+
+// Funções para os botões do ADMIN
+
+$('.btn-alt').click(function (e) {
+        let typeOfData = $(e.target).parent().parent()[0].id.split('-')[1];
+        let idOfData = $(e.target).parent().parent()[0].id.split('-')[2];
+
+        window.location.href = `alt_dado_admin.php?tipo=${typeOfData}&id=${idOfData}`;
+
+        console.log(typeOfData, idOfData);
+})

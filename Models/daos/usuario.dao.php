@@ -8,6 +8,55 @@ class UsuarioDAO
         $this->pdo = $pdo;
     }
 
+    public function buscarTodos($usuario) {
+        $sql = "SELECT * FROM usuarios";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function buscarTodosEnd($usuario) {
+        $sql = "SELECT * FROM enderecos";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function buscarTodosTel($usuario) {
+        $sql = "SELECT * FROM telefones";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function buscarTodosPro($usuario) {
+        $sql = "SELECT * FROM produtos";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function buscarTodosPed($usuario) {
+        $sql = "SELECT * FROM pedidos";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function buscarTodosItem($usuario) {
+        $sql = "SELECT * FROM itens";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function buscarTodosEsp($usuario) {
+        $sql = "SELECT * FROM especificacoes";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function buscarPorId($usuario)
     {
         // Funcionamento já verificado

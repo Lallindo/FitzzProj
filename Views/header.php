@@ -63,11 +63,13 @@ require_once '../models/daos/pedido.dao.php';
             <!-- NÃO CLIQUE NOS BOTOES AINDA -->
             
             <?php
-                if(isset($_SESSION['user_id'])) {
+                if(isset($_SESSION['user_id']) && ($_SESSION['user_is_adm'] == 1)) {
+                    echo "<li><a href='admin.php?table=users'><img class='icone_menu' src='../Images/user.ico' alt='' draggable='false'></a></li>";
+                } else if (isset($_SESSION['user_id'])) {
                     echo "<li><a href='perfil.php'><img class='icone_menu' src='../Images/user.ico' alt='' draggable='false'></a></li>";
                 } else {
                     echo "<li><a href='login.php'><img class='icone_menu' src='../Images/user.ico' alt='' draggable='false'></a></li>";
-                }
+                } 
             ?>
             
             <li><a href="carrinho.php"><img class="icone_menu" src="../Images/shopping-cart.ico" alt="" draggable="false"></a></li>
