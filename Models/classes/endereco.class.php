@@ -3,7 +3,7 @@
 class Endereco
 {
     private $id_endereco = 0;
-    private $tipo_endereco = '';
+    private $padrao_endereco = '';
     private $rua_endereco = '';
     private $bairro_endereco = '';
     private $cidade_endereco = '';
@@ -12,7 +12,7 @@ class Endereco
 
     public function __construct(
         $id_endereco = 0,
-        $tipo_endereco = '',
+        $padrao_endereco = '',
         $rua_endereco = '',
         $bairro_endereco = '',
         $cidade_endereco = '',
@@ -20,7 +20,7 @@ class Endereco
         $cep_endereco = ''
     ) {
         $this->id_endereco = $id_endereco;
-        $this->tipo_endereco = $tipo_endereco;
+        $this->padrao_endereco = $padrao_endereco;
         $this->rua_endereco = $rua_endereco;
         $this->bairro_endereco = $bairro_endereco;
         $this->cidade_endereco = $cidade_endereco;
@@ -38,14 +38,14 @@ class Endereco
         $this->id_endereco = $id;
     }
 
-    public function getTipo()
+    public function getPadrao()
     {
-        return $this->tipo_endereco;
+        return $this->padrao_endereco;
     }
 
-    public function setTipo($tipo)
+    public function setPadrao($padrao)
     {
-        $this->tipo_endereco = $tipo;
+        $this->padrao_endereco = $padrao;
     }
 
     public function getRua()

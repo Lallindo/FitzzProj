@@ -23,7 +23,8 @@ class Usuario
         $datanasc_usuario = '',
         $id_telefone = 0,
         $numero_telefone = '',
-        $tipo_end = '',
+        $id_endereco = 0,
+        $padrao_end = 0,
         $rua_end = '',
         $bairro_end = '',
         $cidade_end = '',
@@ -42,7 +43,7 @@ class Usuario
             $id_telefone, $numero_telefone
         );
         $this->enderecos[] = new Endereco(
-            0, $tipo_end, 
+            $id_endereco, $padrao_end, 
             $rua_end, $bairro_end, $cidade_end,
             $estado_end, $cep_end
         );

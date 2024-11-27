@@ -91,6 +91,46 @@ class UsuarioDAO
         ]);
     }
 
+    public function adicionarEnd($usuario) {
+        $sql = "INSERT INTO enderecos(id_endereco, id_usuario_endereco, padrao_endereco, rua_endereco, bairro_endereco, cidade_endereco, estado_endereco, cep_endereco) 
+        VALUES (:id, :id_usuario, 0, :rua, :bairro, :cidade, :estado, :cep)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => 0,
+            'id_usuario' => $usuario->getId(),
+            'rua' => $usuario->getEnd()[0]->getRua(),
+            'bairro' => $usuario->getEnd()[0]->getBairro(),
+            'cidade' => $usuario->getEnd()[0]->getCidade(),
+            'estado' => $usuario->getEnd()[0]->getEstado(),
+            'cep' => $usuario->getEnd()[0]->getCEP()
+        ]);
+    }
+
+    public function alterarEnd($usuario) {
+        $sql = "UPDATE enderecos SET padrao_endereco = :padrao, rua_endereco = :rua, bairro_endereco = :bairro, cidade_endereco = :cidade, estado_endereco = :estado, cep_endereco = :cep
+                WHERE id_usuario_endereco = :id_usuario AND id_endereco = :id_endereco";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'padrao' => $usuario->getEnd()[0]->getPadrao(),
+            'rua' => $usuario->getEnd()[0]->getRua(),
+            'bairro' => $usuario->getEnd()[0]->getBairro(),
+            'cidade' => $usuario->getEnd()[0]->getCidade(),
+            'estado' => $usuario->getEnd()[0]->getEstado(),
+            'cep' => $usuario->getEnd()[0]->getCEP(),
+            'id_usuario' => $usuario->getId(),
+            'id_endereco' => $usuario->getEnd()[0]->getId()
+        ]);
+    }
+
+    public function removerEnd($usuario) {
+        $sql = "DELETE FROM enderecos WHERE id_endereco = :id_end AND id_usuario_endereco = :id_usuario";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id_end' => $usuario->getEnd()[0]->getId(),
+            'id_usuario' => $usuario->getId()
+        ]);
+    }
+
     public function registrarUsuario($usuario) {
         // Funcionamento já verificado
         $sql_user = "INSERT INTO usuarios 
