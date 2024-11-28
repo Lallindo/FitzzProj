@@ -1,17 +1,27 @@
 <?php
 require_once "header.php";
 
+$usuario = new Usuario($_SESSION['user_id']);
+$usuarioDAO = new UsuarioDAO($pdo);
+
 if (!isset($_SESSION['user_id'])) {
     header('location: login.php');
+} else if (empty($usuarioDAO->buscarPedidoEmAberto($usuario))) {    
+    $msg = 'Seu carrinho está vazio';
 } else {
-    $usuario = new Usuario($_SESSION['user_id']);
-    $usuarioDAO = new UsuarioDAO($pdo);
     $id_pedido = $usuarioDAO->buscarPedidoEmAberto($usuario);
     // Devemos checar se o pedido está aberto
     $pedido = new Pedido($id_pedido[0]->id_pedido);
     $pedidoDAO = new PedidoDAO($pdo);
 
+    $produtoDAO = new ProdutoDAO($pdo);
+
     $retorno = $pedidoDAO->buscarItens($pedido);
+
+    $especDAO = new EspecificacaoDAO($pdo);
+    $ret = $especDAO->buscarPorId(new Especificacao($retorno[0]->id_espec_item));
+    $img = $produtoDAO->buscarFotoEspec(new Produto($ret[0]->id_prod_espec, cor_espec: $ret[0]->cor_espec));
+    // var_dump($img);
 }
 
 $total_compra = 0;
@@ -48,13 +58,17 @@ $total_compra = 0;
         <h1>Carrinho</h1>
         <?php
         if (empty($retorno)) {
-            echo "Seu carrinho está vazio";
+            echo $msg;
         } else {
             $especDAO = new EspecificacaoDAO($pdo);
             $produtoDAO = new ProdutoDAO($pdo);
 
             // SRC da imagem deve ser trocada pelo valor do banco
-            foreach ($retorno as $pedido) {
+            foreach ($retorno as $pedido) {    $produtoDAO = new ProdutoDAO($pdo);
+            
+                $especDAO = new EspecificacaoDAO($pdo);
+                $ret = $especDAO->buscarPorId(new Especificacao($pedido->id_espec_item));
+                $img = $produtoDAO->buscarFotoEspec(new Produto($ret[0]->id_prod_espec, cor_espec: $ret[0]->cor_espec));
                 $espec = $especDAO->buscarPorId(new Especificacao($pedido->id_espec_item))[0];
                 $produto = $produtoDAO->buscarPorId(new Produto($espec->id_prod_espec))[0];
 
@@ -84,12 +98,11 @@ $total_compra = 0;
 
                 $produto->preco_produto = number_format($produto->preco_produto, 2, ',', '.');
                 $valor_total = number_format($valor_total, 2, ',', '.');
-                // var_dump($item);
                 echo "
         <hr>
         <div class='item-carrinho'>
         
-            <img src='../Images/camisetas/demon-preta-f-1.webp' alt='Camiseta DEMON' class='imagem-produto' />
+            <img src='../Images/Produtos/{$img[0]->imagem1_espec}' alt='Camiseta DEMON' class='imagem-produto' />
             <div class='detalhes-produto'>
                 <h2>{$produto->nome_produto}</h2>
                 <p>{$cor} - {$tamanho}</p>

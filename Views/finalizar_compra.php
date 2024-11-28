@@ -1,19 +1,23 @@
 <?php
 require_once "header.php";
 
-echo "<br><br><br><br><br><br><br><br>";
-
 $usuario = new Usuario($_SESSION['user_id']);
 $usuarioDAO = new UsuarioDAO($pdo);
 
-$id_pedido = $usuarioDAO->buscarPedido($usuario)[0]->id_pedido;
+if (empty($usuarioDAO->buscarPedidoEmAberto($usuario))) {
+    header('location: index.php');
+}
+$id_pedido = $usuarioDAO->buscarPedidoEmAberto($usuario)[0]->id_pedido;
+
+
+// var_dump($id_pedido);
 
 $pedido = new Pedido($id_pedido);
 $pedidoDAO = new PedidoDAO($pdo);
 
 $retorno = $pedidoDAO->buscarItens($pedido);
 
-var_dump($retorno);
+// var_dump($retorno);
 
 if (empty($retorno)) {
     header('location: index.php');

@@ -53,6 +53,16 @@ class ProdutoDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     } 
 
+    public function buscarFotoEspec($produto) {
+        $sql = "SELECT imagem1_espec FROM especificacoes WHERE id_prod_espec = :id_prod AND cor_espec = :cor_espec AND tamanho_espec = 0";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id_prod' => $produto->getId(),
+            'cor_espec' => $produto->getEspec()[0]->getCor()
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    } 
+
     // Busca o nome da categoria dentro da string do nome do produto
     // Retorna todos os produtos com aquela substring 
     // https://github.com/Lallindo/FitzzProj/wiki/Nomea%C3%A7%C3%A3o-dos-produtos 

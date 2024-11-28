@@ -68,7 +68,7 @@ var_dump($retorno);
     </div>
     </div>
 
-    <div class="msg_favorito_posicao">
+    <!-- <div class="msg_favorito_posicao">
         <p class="msg_favorito">
             PRODUTOS RELACIONADOS
         </p>
@@ -113,7 +113,7 @@ var_dump($retorno);
                 <br><button class="view_produto">VER PRODUTO</button>
             </p>
         </div>
-    </div>
+    </div> -->
 
     <footer><img src="../Images/logo_branca.webp" alt=""></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

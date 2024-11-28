@@ -1,0 +1,7 @@
+API de CEP traz o ddd da região. Esse pode ser adicionado automaticamente ao número de telefone.
+-> Se a pessoa tiver um telefone de outra região ela tera que alterar o valor manualmente.
+-> Pode diminuir a quantidade de cliques do usuário.
+
+'inserir_prod.php' deve ter alguma verificação de se o usuário é ADM.
+
+Terminar o sistema de importação de fotos para o catálogo.

@@ -1,0 +1,3 @@
+Para conseguir a página que o usuário está indo -> $_SERVER['REQUEST_URI'].
+
+Salvar as cores em inglês para que a transição para o css seja automática.

@@ -3,11 +3,15 @@ require_once "header.php";
 
 // Usuário deve estar logado antes de fazer a compra, os dados do item feito podem ser salvos na session
 
+$produtoDAO = new ProdutoDAO($pdo);
+
 var_dump($_REQUEST);
 if (isset($_SESSION['saved_id'])) {
-    $produto = new Produto($_SESSION['saved_id'], 0, '', '', $_SESSION['saved_cor'], $_SESSION['saved_tam'], $_SESSION['saved_quant'], []);
+    $id_espec = $produtoDAO->buscarEspecItem( new Produto($_REQUEST['saved_id']))[0]->id_espec;
+    $produto = new Produto($_SESSION['saved_id'],id_espec: $id_espec, cor_espec: $_SESSION['saved_cor'], tamanho_espec: $_SESSION['saved_tam'], quant_espec: $_SESSION['saved_quant']);
 } else {
-    $produto = new Produto($_REQUEST['id_prod'], 0, '', '', $_REQUEST['cor_espec'], $_REQUEST['tam_espec'], $_REQUEST['quant_espec'], []);
+    $id_espec = $produtoDAO->buscarEspecItem(new Produto($_REQUEST['id_prod'], cor_espec: $_REQUEST['cor_espec'], tamanho_espec: $_POST['tam_espec']));
+    $produto = new Produto($_REQUEST['id_prod'], id_espec: $id_espec,cor_espec: $_REQUEST['cor_espec'],tamanho_espec: $_REQUEST['tam_espec'],quant_espec: $_REQUEST['quant_espec']);
 }
 
 // Dentro do $produto temos a Cor, Tamanho e Quantidade da compra

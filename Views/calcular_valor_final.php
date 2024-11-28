@@ -1,7 +1,7 @@
 <?php
 require_once 'header.php';
-var_dump($_SESSION);
-var_dump($_REQUEST);
+// var_dump($_SESSION);
+// var_dump($_REQUEST);
 
 $valor_total = 0.0;
 $tipo_pagamento = null;
@@ -16,7 +16,7 @@ if ($_REQUEST['tipo'] === 'pix') {
 $usuario = new Usuario($_SESSION['user_id']);
 $usuarioDAO = new UsuarioDAO($pdo);
 
-$pedido = new Pedido($usuarioDAO->buscarPedido($usuario)[0]->id_pedido);
+$pedido = new Pedido($usuarioDAO->buscarPedidoEmAberto($usuario)[0]->id_pedido);
 $pedidoDAO = new PedidoDAO($pdo);
 
 $itens = $pedidoDAO->buscarItens($pedido);
@@ -36,5 +36,6 @@ $pedido->setValor($valor_total);
 $pedido->setTipo('Pendente');
 $pedido->setStatus('Pendente');
 $pedido->setTipo($tipo_pagamento);
+var_dump($pedido);
 $pedidoDAO->finalizarPedido($pedido);
 ?>

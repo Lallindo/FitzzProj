@@ -51,11 +51,11 @@ if ($_POST) {
             <label for="senha"></label>
             <input class="email" type="password" id="senha" name="senha" placeholder="Senha" required>
 
-            <p>ou</p>
+            <!-- <p>ou</p>
 
             <button class="btn_google" type="button">
                 <img src="../Images/google.jpg" alt="Google Login">
-            </button>
+            </button> -->
 
             <div class="botoes">
                 <button class="btn_criarAcc" type="button" onclick="window.location.href='registro.php'">Criar conta</button>
