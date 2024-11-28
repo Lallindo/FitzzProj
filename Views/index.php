@@ -2,7 +2,7 @@
 require_once 'header.php';
 
 $produtoDAO = new ProdutoDAO($pdo);
-$allProd = $produtoDAO->buscarTodos();
+$allProd = $produtoDAO->buscarTodos(new Produto(0));
 ?>
 
 <!DOCTYPE html>

@@ -16,5 +16,13 @@ class EnderecoDAO
         $stmt->execute(['endereco' => $endereco]);  
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function buscarTodos($endereco)
+    {
+        $sql = "SELECT * FROM enderecos";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();  
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 }
 

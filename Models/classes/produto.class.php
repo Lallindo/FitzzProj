@@ -12,10 +12,12 @@ class Produto {
         $preco_produto = 0.0,
         $nome_produto = '',
         $descricao_produto = '',
+        $id_espec = 0,
         $cor_espec = '', 
         $tamanho_espec = '',
         $quant_espec = 0,
-        $img_espec = ''
+        $img1_espec = '',
+        $img2_espec = ''
     ) {
         // Adicionar new Especificacoes
 
@@ -23,7 +25,7 @@ class Produto {
         $this->preco_produto = $preco_produto;
         $this->nome_produto = $nome_produto;
         $this->descricao_produto = $descricao_produto;
-        $this->especificacoes[] = new Especificacao(0, $cor_espec, $tamanho_espec, $quant_espec, $img_espec);
+        $this->especificacoes[] = new Especificacao($id_espec, $cor_espec, $tamanho_espec, $quant_espec, [$img1_espec, $img2_espec]);
     }
 
     public function getId() {
@@ -62,8 +64,8 @@ class Produto {
         return $this->especificacoes;
     }
 
-    public function setEspec($cor_espec, $tamanho_espec, $quant_espec, $img_espec) {
+    public function setEspec($cor_espec, $tamanho_espec, $quant_espec, $img1_espec, $img2_espec) {
         // New Especificacoes
-        $this->especificacoes[] = new Especificacao(0, $cor_espec, $tamanho_espec, $quant_espec, $img_espec);
+        $this->especificacoes[] = new Especificacao(0, $cor_espec, $tamanho_espec, $quant_espec, [$img1_espec, $img2_espec]);
     }
 }

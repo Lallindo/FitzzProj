@@ -18,6 +18,15 @@ class PedidoDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function buscarTodos($pedido)
+    {
+        // Funcionamento já verificado
+        $sql = "SELECT * FROM pedidos";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();  
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function buscarEndereco($pedido) {
         $sql = "SELECT * FROM enderecos WHERE id_endereco = :end";
         $stmt = $this->pdo->prepare($sql);
@@ -52,6 +61,32 @@ class PedidoDAO
             'valor' => $pedido->getValor(),
             'pag' => $pedido->getTipo(),
             'stat' => $pedido->getStatus(),
+            'id' => $pedido->getId()
+        ]);
+    }
+
+    public function alterarPed($pedido) {
+        $sql = "UPDATE pedidos SET status_pedido = :stat WHERE id_pedido = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'stat' => $pedido->getStatus(),
+            'id' => $pedido->getId()
+        ]);
+    }
+
+    public function alterarItem($pedido) {
+        $sql = "UPDATE itens SET quantidade_item = :quant WHERE id_item = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'quant' => $pedido->getItem()[0]->getQuant(),
+            'id' => $pedido->getItem()[0]->getId()
+        ]);
+    }
+
+    public function removerPedido($pedido) {
+        $sql = "DELETE FROM pedidos WHERE id_pedido = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
             'id' => $pedido->getId()
         ]);
     }

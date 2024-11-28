@@ -17,4 +17,21 @@ class EspecificacaoDAO
         $stmt->execute(['espec' => $espec]);  
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function buscarTodos($espec)
+    {
+        // Funcionamento já verificado
+        $sql = "SELECT * FROM especificacoes";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();  
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function removerEspec($espec) {
+        $sql = "DELETE FROM especificacoes WHERE id_espec = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $espec->getId()
+        ]);
+    }
 }

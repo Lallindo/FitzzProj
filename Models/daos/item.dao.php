@@ -18,6 +18,15 @@ class ItemDAO
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function buscarTodos($item)
+    {
+        // Funcionamento já verificado
+        $sql = "SELECT * FROM itens";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();  
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function buscarIdAposInserido($item) {
         // Pega o último item criado no banco com da mesma especificação e quantidade
         $sql = "SELECT id_item FROM itens WHERE id_espec_item = :id_espec AND quantidade_item = :quant ORDER BY id_item DESC LIMIT 1";

@@ -8,7 +8,7 @@ class ProdutoDAO
         $this->pdo = $pdo;
     }
 
-    public function buscarTodos() {
+    public function buscarTodos($produto) {
         $sql = "SELECT * FROM produtos";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
@@ -68,20 +68,54 @@ class ProdutoDAO
 
     // Busca por especificações de uma cor padrão e pega as fotos dessa especificação
     // As fotos serão apresentadas no catálogo
-    public function buscarFotosBasicas($produto) {
-        $sql_para_id = "SELECT id_produto FROM produtos WHERE nome_produto = :prod";
-            $stmt = $this->pdo->prepare($sql_para_id);
-            $stmt->execute([
-                'prod' => $produto->nome_produto 
-            ]);
-            $id_inserido = $stmt->fetchAll(PDO::FETCH_OBJ)[0]->id_produto;
-
-        $sql = "SELECT * FROM especificacoes WHERE id_prod_espec = :id & cor_espec = 0";
+    public function buscarImagens($produto) {
+        $sql = "SELECT * FROM especificacoes WHERE id_prod_espec = :id AND tamanho_espec = 0 AND cor_espec = 0";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
-            'id' => $id_inserido
+            'id' => $produto->getId()
         ]);
         return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function buscarTodasImagens($produto) {
+        $sql = "SELECT * FROM especificacoes WHERE id_prod_espec = :id AND tamanho_espec = 0";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $produto->getId()
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function alterarProd($produto) {
+        $sql = "UPDATE produtos SET preco_produto = :preco, nome_produto = :nome, desc_produto = :desc_prod WHERE id_produto = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'preco' => $produto->getPreco(),
+            'nome' => $produto->getNome(),
+            'desc_prod' => $produto->getDesc(),
+            'id' => $produto->getId()
+        ]);
+    }
+
+    public function alterarEspec($produto) {
+        $sql = "UPDATE especificacoes SET cor_espec = :cor, tamanho_espec = :tam, quantidade_espec = :quant, imagem1_espec = :img1, imagem2_espec = :img2 WHERE id_espec = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'cor' => $produto->getEspec()[0]->getCor(),
+            'tam' => $produto->getEspec()[0]->getTam(),
+            'quant' => $produto->getEspec()[0]->getQuant(),
+            'img1' => $produto->getEspec()[0]->getImg()[0],
+            'img2' => $produto->getEspec()[0]->getImg()[1],
+            'id' => $produto->getEspec()[0]->getId()
+        ]);
+    }
+
+    public function removerProduto($produto) {
+        $sql = "DELETE FROM produtos WHERE id_produto = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $produto->getId()
+        ]);
     }
 
     // Adiciona um produto e suas espeficicações 
@@ -105,10 +139,11 @@ class ProdutoDAO
             $id_inserido = $stmt->fetchAll(PDO::FETCH_OBJ)[0]->id_produto;
             
             foreach ($produto->getEspec() as $espec) {
-                // var_dump($espec);
+                var_dump($espec);
                 $sql_espec = "INSERT INTO especificacoes(id_espec, id_prod_espec, 
                 cor_espec, tamanho_espec, quantidade_espec, imagem1_espec, imagem2_espec) 
                 VALUES (:id, :id_prod, :cor, :tamanho, :quant, :img1, :img2)";
+                var_dump($espec->getImg());
                 $stmt = $this->pdo->prepare($sql_espec);
                 $stmt->execute([
                     'id' => 0,
@@ -116,8 +151,8 @@ class ProdutoDAO
                     'cor' => $espec->getCor(),
                     'tamanho' => $espec->getTam(),
                     'quant' => $espec->getQuant(),
-                    'img1' => '',
-                    'img2' => ''
+                    'img1' => $espec->getImg()[0],
+                    'img2' => $espec->getImg()[1]
                 ]);
             }
         } catch (PDOException $e) {

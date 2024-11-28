@@ -122,6 +122,7 @@ class UsuarioDAO
     }
 
     public function alterarTel($usuario) {
+        var_dump($usuario);
         $sql = "UPDATE telefones SET numero_telefone = :tel WHERE id_usuario_telefone = :id_usuario AND id_telefone = :id_telefone";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([
@@ -130,6 +131,8 @@ class UsuarioDAO
             'id_telefone' => $usuario->getTel()[0]->getId()
         ]);
     }
+
+
 
     public function removerTel($usuario) {
         $sql = "DELETE FROM telefones WHERE id_telefone = :id_tel AND id_usuario_telefone = :id_usuario";
@@ -156,6 +159,7 @@ class UsuarioDAO
     }
 
     public function alterarEnd($usuario) {
+        var_dump($usuario);
         $sql = "UPDATE enderecos SET padrao_endereco = :padrao, rua_endereco = :rua, bairro_endereco = :bairro, cidade_endereco = :cidade, estado_endereco = :estado, cep_endereco = :cep
                 WHERE id_usuario_endereco = :id_usuario AND id_endereco = :id_endereco";
         $stmt = $this->pdo->prepare($sql);
@@ -177,6 +181,40 @@ class UsuarioDAO
         $stmt->execute([
             'id_end' => $usuario->getEnd()[0]->getId(),
             'id_usuario' => $usuario->getId()
+        ]);
+    }
+
+    public function alterarUsuario($usuario) {
+        var_dump($usuario);
+        $sql = "UPDATE usuarios SET nomecomp_usuario = :nome, cpf_usuario = :cpf, email_usuario = :email, datanasc_usuario = :datanasc, admin_usuario = :admin_usuario WHERE id_usuario = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'nome' => $usuario->getNome(),
+            'cpf' => $usuario->getCPF(),
+            'email' => $usuario->getEmail(),
+            'datanasc' => $usuario->getDataNasc(),
+            'admin_usuario' => $usuario->getAdmin(),
+            'id' => $usuario->getId()
+        ]);
+    }
+
+    public function removerUsuario($usuario) {
+        $sql = "DELETE FROM usuarios WHERE id_usuario = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $usuario->getId()
+        ]);
+
+        $sql = "DELETE FROM enderecos WHERE id_usuario_endereco = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $usuario->getId()
+        ]);
+
+        $sql = "DELETE FROM telefones WHERE id_usuario_telefone = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([
+            'id' => $usuario->getId()
         ]);
     }
 

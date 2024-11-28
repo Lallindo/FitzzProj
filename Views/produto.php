@@ -1,9 +1,10 @@
 <?php
 require_once 'header.php';
 
-$produto = new Produto(id_produto: (int) $_REQUEST['id_prod']);
+$produto = new Produto(id_produto: (int) $_REQUEST['id_prod'], nome_produto: 'Teste2');
 $produtoDAO = new ProdutoDAO($pdo);
 $retorno = $produtoDAO->buscarPorId($produto)[0];
+var_dump($retorno);
 ?>
 
 <!DOCTYPE html>
@@ -21,10 +22,10 @@ $retorno = $produtoDAO->buscarPorId($produto)[0];
     ?>
     <div id="favoritos">
         <div>
-            <button class="arrow left" onclick="previousImage()">&#8249;</button>
-            <img id="main-image" src="../Images/camisetas/deidara-branca-c-1.webp" alt="Camiseta TLOU Branca"
+            <button id="arrow-left">&#8249;</button>
+            <img id="main-image" src="../Images/camisetas/" alt="Camiseta TLOU Branca"
                 draggable="false">
-            <button class="arrow right" onclick="nextImage()">&#8250;</button>
+            <button id="arrow-right">&#8250;</button>
         </div>
         <orm class="titulo_img">
 

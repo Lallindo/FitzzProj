@@ -3,12 +3,12 @@ require_once 'header.php';
 
 $produto = new Produto(nome_produto: $_REQUEST['filtro']);
 $produtoDAO = new ProdutoDAO($pdo);
-
 $retorno = $produtoDAO->buscarSubstring($produto);
-
-// var_dump($produtoDAO->buscarTodos());
-
-// var_dump($retorno);
+$img = [];
+foreach($retorno as $prod) {
+    $produto = new Produto($prod->id_produto);
+    $img[] = $produtoDAO->buscarImagens($produto);
+}
 ?>
 
 <!DOCTYPE html>
@@ -28,23 +28,26 @@ $retorno = $produtoDAO->buscarSubstring($produto);
             if (empty($retorno)) {
                 echo "Nenhum item adicionado";
             } else {
-                foreach ($retorno as $produto) 
-                // Imagem tem que referenciar o id do produto
-                // IMG= ../Images/{$imagem do produto}
-                // Link = ../produto.php?id_produto={$produto->id}
-                echo
-                "<div class='col-lg-4 col-md-6'>
-                    <div class='card'>
-                        <a href='produto.php?id_prod={$produto->id_produto}'>
-                            <img src='../Images/camisetas/deidara-branca-c-1.webp' class='card-img-top' alt='Produto 1'>
-                        </a>
-                        <div class='card-body'>
-                            <h5 class='card-title'>{$produto->nome_produto}</h5>
-                            <p class='card-text'>R$ {$produto->preco_produto}</p>
+                $i = 0;
+                foreach ($retorno as $produto) {
+                    // Imagem tem que referenciar o id do produto
+                    // IMG= ../Images/{$imagem do produto}
+                    // Link = ../produto.php?id_produto={$produto->id}
+                    echo
+                    "<div class='col-lg-4 col-md-6'>
+                        <div class='card'>
+                            <a href='produto.php?id_prod={$produto->id_produto}'>
+                                <img src='../Images/Produtos/{$img[$i][0]->imagem1_espec}' style='height:400px; width:439px;' class='card-img-top' alt='Produto 1'>
+                            </a>
+                            <div class='card-body'>
+                                <h5 class='card-title'>{$produto->nome_produto}</h5>
+                                <p class='card-text'>R$ {$produto->preco_produto}</p>
+                            </div>
                         </div>
-                    </div>
-                </div>";
-            
+                    </div>";
+                    $i++;
+                }
+
             }
             
             ?>

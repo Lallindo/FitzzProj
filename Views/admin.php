@@ -109,7 +109,8 @@ function buildTableTel($data, $i) {
 
 function tableProd() {
     echo
-    "<tr>
+    "
+    <tr>
         <td>ID</td>
         <td>Preço</td>
         <td>Nome</td>
@@ -256,6 +257,7 @@ function buildTableEsp($data, $i) {
                         } else if ($_REQUEST['table'] == 'phones') {
                             tableTel();
                         } else if ($_REQUEST['table'] == 'products') {
+                            echo "<button type='button' id='add-prod' class='btn-primary btn-success'>Adicionar Produto</button>";
                             tableProd();
                         } else if ($_REQUEST['table'] == 'orders') {
                             tablePed();

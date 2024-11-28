@@ -118,3 +118,14 @@ $('.btn-alt').click(function (e) {
 
         console.log(typeOfData, idOfData);
 })
+
+$('body').on('click', '#add-prod', function (e) {
+        window.location.href = 'inserir_prod.php';
+})
+
+$('.btn-rem').click(function (e) {
+        let parentId = $(e.target).parent().parent()[0].id;
+        let id = parentId.split('-')[2];
+        let tipo = parentId.split('-')[1];
+        window.location.href = `remover_dado.php?tipo=${tipo}&id=${id}`
+})

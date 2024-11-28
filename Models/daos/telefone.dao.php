@@ -17,5 +17,13 @@ class TelefoneDAO
         $stmt->execute(['telefone' => $telefone]);  
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
+
+    public function buscarTodos($telefone)
+    {
+        $sql = "SELECT * FROM telefones";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();  
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
 }
 
